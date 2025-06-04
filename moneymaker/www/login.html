@@ -1,0 +1,128 @@
+{% set asset_path = "../assets/moneymaker/New/" %}
+
+<!DOCTYPE html>
+<html dir="rtl">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="keyword" content="">
+        <meta name="author" content="Wafaa Hegazy">
+        <!--Page Name-->
+        <title> Login </title>
+        <!--Page Icon-->
+        {% include 'www/share/head.html' %}
+    </head>
+    <body data-login="{{ logged_in }}">
+        {% if logged_in != True %}
+        <div id="scrollsmoother-container">
+
+            <!--Start navs-container -->
+            {% include 'www/share/osus_nav.html' %}
+
+            <main>
+                <!-- Start section -->
+                <section class="register_pg section">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6" id="login-block">
+                                <div class="content_box">
+                                    <div class="sec_head mb-5">
+                                        <h4 class="subtitle color-primary mb-3">  تسجيل الدخول   </h4>
+                                        <h1 class="title fw-bold color-secondary mb-4">     بوابتك لعالم المنتجات الرقمية   </h1>
+                                    </div>
+                                    <form id="login-form">
+                                        <div class="form-group">
+                                            <label class="label"> ادخل بريدك الالكتروني </label>
+                                            <div class="form-floating">
+                                                <input id="email" name="email" class="form-control" placeholder="">
+                                                <!-- <input id="email" name="email" type="email" class="form-control" placeholder=""> -->
+                                                <label for="email" class="floatingLabel"> البريد الالكتروني </label>
+                                                <img class="icon" src="{{ asset_path }}images/icons/form/email.svg" alt="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group  ">
+                                            <label class="label"> ادخل كلمة المرور </label>
+                                            <div class="form-floating show_hide_password">
+                                                <input id="password" name="password" type="password" class="form-control" placeholder="">
+                                                <label for="password" class="floatingLabel"> كلمة المرور  </label>
+                                                <img class="icon" src="{{ asset_path }}images/icons/form/lock.svg" alt="" />
+                                                <i class="show_pass far fa-eye-slash"></i>
+                                            </div>
+                                        </div>
+
+                                        <a href="/forget_pass" class="forget_link d-block w-fit ms-auto fw-bold color-primary my-4 "> نسيت كلمة المرور؟ </a>
+
+                                        <button class="butn primary_butn submit_butn w-100" id="login-btn">
+                                            <span> تسجيل الدخول </span>
+                                        </button>
+
+                                        <div class="another_opt">
+                                            ليس لديك حساب ؟
+                                            <a href="/register"> التسجيل </a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-6" id="otp-block" style="display: none;">
+                                <div class="content_box">
+                                    <div class="sec_head mb-5">
+                                        <h4 class="subtitle color-primary mb-3"> كود التحقق </h4>
+                                        <h1 class="title fw-bold color-secondary mb-4"> بوابتك لعالم المنتجات الرقمية </h1>
+                                        <div class="p">
+                                            ادخل كود التحقق المرسل  إلى <b class="color-primary" id="to-email"></b>
+                                        </div>
+                                    </div>
+                                    <form id="otp-form">
+                                        <div class="form-group">
+                                            <div class="mb-4" dir="ltr">
+                                                <input type="text" id="otp" class="form-control" maxlength="6" placeholder="" autofocus="">
+                                                <!-- <input type="text" class="form-control" maxlength="1" placeholder="">
+                                                <input type="text" class="form-control" maxlength="1" placeholder="">
+                                                <input type="text" class="form-control" maxlength="1" placeholder=""> -->
+                                            </div>
+                                        </div>
+
+                                        <div class=" text-center w-100 my-5  ">
+                                            <p class="txt_code m-0 fs-6">ستنتهي صلاحية الكود بعد<strong class="count_down color-primary ms-1" id="timer">60</strong> </p>
+                                            <button type="button" class="resend_link underline color-primary mt-3 d-block  fs-6" id="resend-otp">إعادة إرسال الكود</button>
+                                        </div>
+
+                                        <button class="butn primary_butn submit_butn w-100">
+                                            <span> تأكيد </span>
+                                        </button>
+
+
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <img src="{{ asset_path }}images/login-1.svg" class="secImg" alt="" />
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+            </main>
+
+            <!-- Start footer -->
+            {% include 'www/share/osus_footer.html' %}
+
+        </div>
+
+        <!--Scroll to top button-->
+        <div class="progress-wrap ">
+            <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+        </div>
+        {% endif %}
+
+        <!-- loading -->
+        {% include 'www/share/loading.html' %}
+
+        <!--Js Files & Libraries-->
+        {% include 'www/share/js.html' %}
+        <script src="login.js"></script>
+    </body>
+</html>

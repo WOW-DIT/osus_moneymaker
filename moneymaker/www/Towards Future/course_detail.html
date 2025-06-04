@@ -1,0 +1,256 @@
+{% set asset_path = '../assets/moneymaker/training_platform/' %}
+{% set riyal_symbol = '/files/riyal_symbol.svg' %}
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> {{course.course.name}} </title>
+    <!--Page Icon-->
+    <link rel="shortcut icon" href="{{ content.icon_image }}" type="image/x-icon" title="Favicon" sizes="16x16" />
+
+    {% include 'www/training_shared/styles.html' %}
+</head>
+<body class="" data-inst="{{content.institution}}" data-brand="{{content.brand_name}}" data-company="{{content.company}}">
+
+    <!--Start navs-container -->
+    <div class="navs-container">
+        {% include 'www/training_shared/top_nav.html' %}
+
+        <!--Start main-nav-->
+        {% include 'www/training_shared/main_nav.html' %}
+    </div>
+
+    <main>
+
+        <!-- Start section -->
+        {% with title = 'تفاصيل الدورة' %}
+        {% include 'www/training_shared/page_header.html' %}
+        {% endwith %}
+
+        <!-- Start section -->
+        <section class="course_det_pg section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="box">
+                            <h2 class="title fw-bold mb-5"> {{course.course.course_name_ar}} </h2>
+                            <div class="p">
+                                {{course.course.description_ar}}
+                            </div>
+
+                            <h5 class="fw-bold mt-5 mb-4"> ماذا سوف تتعلم </h5>
+                            <ul class="check-list">
+                                {% for p in course.points %}
+                                <li> 
+                                    <span class="icon"> <i class="fal fa-check"></i> </span> 
+                                    <span class="txt">
+                                        {{p.title}}
+                                    </span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+
+                            <h5 class="fw-bold mt-5 mb-4"> محتوى الدورة </h5>
+                            <div class="accordion" id="accordionExample">
+                                {% for item in course_items %}
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button {% if item.order == 1 %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{item.order}}"
+                                            aria-expanded="{% if item.order == 1 %}true{% else %}false{% endif %}" aria-controls="collapse{{item.order}}">
+                                            {{item.order}} - {{item.title}}
+                                            <small class="clock"> <i class="fal fa-clock"></i> {% if item.minutes < 10 %}0{% endif %}{{item.minutes}}:{% if item.seconds < 10 %}0{% endif %}{{item.seconds}} دقيقة </small>
+                                        </button>
+                                    </h2>
+                                    <div id="collapse{{item.order}}" class="accordion-collapse collapse {% if item.order == 1 %} show {% endif %}" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <div class="p"> 
+                                                {{item.description}}   
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="sm_box">
+                            <div class="vid_box">
+                                <img src="{{course.course.hero_image}}" class="secImg" alt="">
+                                <!-- <img src="{{ asset_path }}images/courses-1.webp" class="secImg" alt=""> -->
+                                
+                                <!-- <div class="button is-play" data-fancybox="" href="https://www.youtube.com/watch?v=mkggXE5e2yk">
+                                    <div class="button-outer-circle has-scale-animation"></div>
+                                    <div class="button-outer-circle has-scale-animation has-delay-short"></div>
+                                    <div class="button-icon is-play">
+                                        <svg height="100%" width="100%" fill="#fff"><polygon class="triangle" points="5,0 30,15 5,30" viewBox="0 0 30 15"></polygon><path class="path" d="M5,0 L30,15 L5,30z" fill="none" stroke="#fff" stroke-width="1"></path></svg>
+                                    </div>
+                                </div> -->
+
+                            </div>
+                            <div class="course_contains mt-4 mb-5 col-lg-10 mx-auto">
+                                <h6 class="fw-bold fs-6 mb-4"> تفاصيل الدورة   </h6>
+                                <div class="">
+                                    <div class="item d-flex align-items-center justify-content-between">
+                                        <p class=""> <i class="fa-light fa-star"></i> التقييم </p>
+                                        <p class="fw-bold"> {{course.course.rate_count}} </p>
+                                    </div>
+                                    <div class="item d-flex align-items-center justify-content-between">
+                                        <p class=""> <i class="fa-light fa-user"></i>  المدرب         </p>
+                                        <p class="fw-bold"> {{course.course.created_by}} </p>
+                                    </div>
+                                    <div class="item d-flex align-items-center justify-content-between">
+                                        <p class=""> <i class="fa-light fa-globe"></i> اللغات </p>
+                                        <p class="fw-bold"> {{course_langs}} </p>
+                                    </div>
+                                    <div class="item d-flex align-items-center justify-content-between">
+                                        <p class=""> <i class="fa-light fa-circle-dollar"></i> السعر </p>
+                                        <div class="fw-bold d-flex justify-content-center align-items-center gap-1">
+                                            <p id="price-tag">{{course.course.price}}</p>
+                                            <img class="riyal_symbol" src="{{riyal_symbol}}" alt="">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            
+                            <div class="col-lg-10 mx-auto">
+                                {% if course_items|length > 0 %}
+                                <div class="">
+                                    <a href="/{{content.brand_name}}/course_content?id={{course.course.name}}" class="butn primary_border_butn butn_w_arrow  mt-4 w-100">
+                                        <span class="butn-icon-inner"><i class="fal fa-arrow-right"></i>الذهاب إلى الدورة</span>
+                                    </a>
+                                    {% if has_purchased != None %}
+                                    <a href="/{{content.brand_name}}/course_content?id={{course.course.name}}" class="butn primary_border_butn butn_w_arrow  mt-4 w-100">
+                                        <span class="butn-icon-inner"><i class="fal fa-arrow-right"></i>الذهاب إلى الدورة</span>
+                                    </a>
+                                    {% else %}
+                                    <button type="button" id="purchase-btn" class="butn primary_border_butn butn_w_arrow  mt-4 w-100">
+                                        <span> اشترك الآن </span>
+                                    </button>
+                                    {% endif %}
+                                </div>
+                                {%else %}
+                                <button disabled class="butn primary_border_butn butn_w_arrow  mt-4 w-100">
+                                    <span> قريبا... </span>
+                                </button>
+                                {% endif %}
+                                
+                            </div>
+
+                            <!-- <div class="butns row mt-4 col-lg-10 mx-auto">
+                                <div class="col-lg-9 col-9">
+                                    <a href="#" class="butn primary_border_butn rounded w-100 mb-3"> 
+                                        <span>  <i class="fa-light fa-share-nodes"></i> مشاركة الدورة   </span>
+                                    </a>
+                                </div>
+                                <div class="col-lg-3 col-3">
+                                    <a href="#" class="butn primary_border_butn rounded sm_butn"> 
+                                        <i class="fa-light fa-heart mx-0"></i>
+                                    </a>
+                                </div>
+                                <div class="col-lg-12">
+                                    <a href="#" class="butn primary_butn w-100 rounded"> 
+                                        <span> اشترك الآن </span>
+                                    </a>
+                                </div>
+                          
+                            </div> -->
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Start section -->
+        <!-- <section class="courses_sec section">
+            <div class="container">
+                <div class="sec_head text-center mb-5">
+                    <h6 class="subtitle fs-5 color-primary">
+                        <span class="line_w_circle me-3"></span>
+                        <span class=""> الدورات التدريبية </span>
+                        <span class="line_w_circle ms-3"></span>
+
+                    </h6>
+                    <h1 class="mt-4  w-fit mx-auto"> 
+                        قد تعجبك هذه الدورات
+                    </h1>
+                </div>
+              
+
+                <div class="swiper-container courses_swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <div class="course_card">
+                                    <div class="img_box">
+                                        <img src="{{ asset_path }}images/courses-1.webp" class="secImg" alt="" />
+                                        <img src="{{ asset_path }}images/courses-1.webp" class="secImg" alt="" />
+                                        <div class="overlay"></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="categ">برمجة</p>
+                                        <h4 class="title"> اساسيات البرمجة للمبتدئين </h4>
+                                        <div class="p">
+                                            
+                                            دية تُعد من أفضل الشركات في مجال تقديم الخدمات التقنية  على جهوده الرائعة.
+                                                
+                                        </div>
+        
+                                        <div class="price_row">
+                                            <div class="price">
+                                                <span> 25.00 <small> ريال </small> </span>
+                                                <span class="old_prc"> 25.00 <small> ريال </small> </span>
+                                            </div>
+                                            <div class="stars">
+                                                <span class="star"> <i class="fas fa-star me-1"></i> </span>
+                                                <span> 5 </span>
+                                            </div>
+                                        </div>
+        
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            
+        </section> -->
+
+
+    </main>
+
+    <!-- Start footer -->
+    {% include 'www/training_shared/footer.html' %}
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    <!-- loading -->
+    <!-- <div id="preloader">
+        <div id="loading-wrapper" class="show">
+            <div id="loading-text"> <img src="icon.png" alt=""> </div>
+            <div id="loading-content"></div>
+        </div>
+    </div> -->
+
+    <!--Js Files & Libraries-->
+    {% include 'www/training_shared/scripts.html' %}
+    <script src="../{{content.brand_name}}/course_det.js"></script>
+
+</body>
+</html>

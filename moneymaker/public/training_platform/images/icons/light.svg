@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12" viewBox="0 0 12 12">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="1" x2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffe59a"/>
+      <stop offset="1" stop-color="#ffffd5"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fd5900"/>
+      <stop offset="1" stop-color="#ffde00"/>
+    </linearGradient>
+  </defs>
+  <g id="morning" transform="translate(-0.455 0.052)">
+    <g id="Group_762" data-name="Group 762" transform="translate(0 0)">
+      <circle id="Ellipse_165" data-name="Ellipse 165" cx="6" cy="6" r="6" transform="translate(0.455 -0.052)" fill="url(#linear-gradient)"/>
+    </g>
+    <g id="Group_764" data-name="Group 764" transform="translate(3.075 3.571)">
+      <g id="Group_763" data-name="Group 763">
+        <path id="Path_1448" data-name="Path 1448" d="M112.05,171.023h-1.609a1.923,1.923,0,1,0-3.618,0h-1.61a.214.214,0,0,0,0,.427h6.837a.214.214,0,0,0,0-.427Zm-3.418-2.991a.214.214,0,0,0,.214-.214v-.427a.214.214,0,0,0-.427,0v.427A.214.214,0,0,0,108.632,168.032Zm-2.991,2.564h.427a.214.214,0,1,0,0-.427h-.427a.214.214,0,0,0,0,.427Zm5.341-.214a.214.214,0,0,0,.214.214h.427a.214.214,0,0,0,0-.427H111.2A.214.214,0,0,0,110.982,170.382Zm-.023-1.1.37-.214a.214.214,0,0,0-.214-.37l-.37.214a.214.214,0,0,0,.214.37Zm-1.152-.939a.214.214,0,0,0,.292-.078l.214-.37a.214.214,0,0,0-.37-.214l-.214.37A.214.214,0,0,0,109.807,168.346Zm-2.642-.078a.214.214,0,0,0,.37-.214l-.214-.37a.214.214,0,1,0-.37.214Zm-1.23.8.37.214a.214.214,0,0,0,.214-.37l-.37-.214a.214.214,0,0,0-.214.37Z" transform="translate(-105 -167.177)" fill="url(#linear-gradient-2)"/>
+      </g>
+    </g>
+  </g>
+</svg>

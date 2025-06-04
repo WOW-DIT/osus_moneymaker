@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include moneymaker *.css
+recursive-include moneymaker *.csv
+recursive-include moneymaker *.html
+recursive-include moneymaker *.ico
+recursive-include moneymaker *.js
+recursive-include moneymaker *.json
+recursive-include moneymaker *.md
+recursive-include moneymaker *.png
+recursive-include moneymaker *.py
+recursive-include moneymaker *.svg
+recursive-include moneymaker *.txt
+recursive-exclude moneymaker *.pyc

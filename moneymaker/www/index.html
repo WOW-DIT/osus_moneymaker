@@ -1,0 +1,450 @@
+{% set asset_path = "../assets/moneymaker/New/" %}
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> Osus | Home  </title>
+    <!--Page Icon-->
+    {% include 'www/share/head.html' %}
+</head>
+<body>
+<div id="scrollsmoother-container">
+
+    <!--Start navs-container -->
+    {% include 'www/share/osus_nav.html' %}
+
+    <main>
+
+        <!-- Start Header -->
+        <header class="header section">
+            <div class="container">
+                <div class="inner">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="txt_box">
+                                <h1 class="title color-primary "> {{ _(content.main.hero_title) }} </h1>
+                                <h1 class="title fw-bold color-secondary"> {{ _(content.main.hero_subtitle) }} </h1>
+                                <div class="p col-lg-10 my-4">
+                                    {{ _(content.main.hero_description) }}
+                                </div>
+                                <button href="#" class="butn primary_border_butn butn_w_arrow ">
+                                    <span> {{ _(content.main.hero_button_text) }} </span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <img src="{{ content.main.hero_image }}" class="heroImg secImg" alt="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Start section -->
+        <section class="about_sec section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-5">
+                        <img src="{{ content.main.about_image }}" class="secImg" alt="" />
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="txt_box ps-lg-5">
+                            <h4 class="subtitle color-primary mb-3"> من نحن </h4>
+                            <h1 class="title fw-bold color-secondary mb-4"> صنع بحب في السعودية </h1>
+                            <div class="p">
+                                {{ _(content.main.about_osus) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img src="{{ asset_path }}images/pattern-1.svg" class="pattern" alt="">
+        </section>
+
+        <!-- Start section -->
+        {% if services|length > 0 %}
+        <section class="service_sec section" id="service_sec">
+            <div class="container">
+                <div class="inner">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8">
+                            <div class="sec_head col-lg-10">
+                                <h4 class="subtitle color-primary mb-3"> خدماتنا   </h4>
+                                <h1 class="title fw-bold color-secondary mb-4"> مزايا بلا حدود لتجربة رقمية شاملة!       </h1>
+                                <div class="p col-lg-10">
+                                    هي منصة سحابية للتدريب والتطوير والتجارة الإلكترونية، الحل الشامل الذي يلبي 
+                                    احتياجات مراكز التدريب، التجار الصغار، وشركات تطوير الأعمال. نقدم لك مجموعة متكاملة من الخدمات السحابية لتبسيط عملية تطوير المجتمع و تأهيلهم بطرق
+                                    مبتكرة وفعّالة.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="serv_box">
+                                <div class="content">
+                                    <img src="{{ services.0.image }}" class="icon" alt="" />
+                                    <h5 class="title color-secondary fw-bold"> {{ _(services.0.name) }} </h5>
+                                    <div class="p">
+                                        {{ _(services.0.description) }}
+                                    </div>
+                                    <!-- <h5 class="title color-secondary fw-bold"> المنصة التعليمية    </h5>
+                                    <div class="p">
+                                        توفر هذه الخدمة للعميل إمكانية استئجار منصة إلكترونية مخصصة لرفع الدورات التدريبية فقط، حيث يمكن للمدربين والمؤسسات رفع محتوى الدورات وإتاحته للمتدربين. لكنها لا تشمل إدارة الطلاب أو تقديم الاختبارات والتقييمات.
+                                    </div> -->
+                                </div>
+                                <!-- <a href="#" class="more_butn color-primary">
+                                    معرفة المزيد  <i class="fa-regular fa-angle-left"></i>
+                                </a> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% for ser in services %}
+                        {% if loop.index0 != 0 %}
+                        <div class="col-lg-4">
+                            <div class="serv_box">
+                                <div class="content">
+                                    <img src="{{ ser.image }}" class="icon" alt="" />
+                                    <h5 class="title color-secondary fw-bold"> {{ _(ser.name) }} </h5>
+                                    <div class="p">
+                                        {{ _(ser.description) }}
+                                    </div>
+                                    <!-- <h5 class="title color-secondary fw-bold">    التدريب المتكامل    </h5> -->
+                                    <!-- <div class="p">
+                                        خدمة مخصصة للأفراد والشركات، حيث تشمل برامج تدريبية متكاملة مع إمكانية إدارة الطلاب، تقديم الاختبارات والتقييمات، وتوفير استشارات متخصصة لضمان تحقيق أقصى استفادة من العملية التدريبية.
+                                    </div> -->
+
+                                </div>
+                                <!-- <a href="#" class="more_butn color-primary">
+                                    معرفة المزيد  <i class="fa-regular fa-angle-left"></i>
+                                </a> -->
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        <!-- <div class="col-lg-4">
+                            <div class="serv_box">
+                                <div class="content">
+                                    <img src="{{ asset_path }}images/icons/services/6.svg" class="icon" alt="" />
+                                    <h5 class="title color-secondary fw-bold">  	التسريع والإحتضان      </h5>
+                                    <div class="p">
+                                        تستهدف هذه الخدمة رواد الأعمال والشركات الناشئة، حيث يتم تقديم برامج لدعم وتسريع نمو المشاريع. تشمل هذه البرامج الإرشاد والتوجيه، توفير مساحات عمل مشتركة، تقديم الدعم الفني والتقني، وربط رواد الأعمال بالمستثمرين والشركاء الاستراتيجيين.
+                                    </div>
+
+                                </div>
+                                <a href="#" class="more_butn color-primary">
+                                    معرفة المزيد  <i class="fa-regular fa-angle-left"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="serv_box">
+                                <div class="content">
+                                    <img src="{{ asset_path }}images/icons/services/7.svg" class="icon" alt="" />
+                                    <h5 class="title color-secondary fw-bold">  	المتجر الإلكتروني      </h5>
+                                    <div class="p">
+                                        متجر إلكتروني مرن يتيح للعملاء بيع وشراء المنتجات المتنوعة، سواء كانت منتجات رقمية، مادية، أو اشتراكات مثل الاشتراك في خدمات المطبخ أو غيرها. يدعم المتجر وسائل دفع إلكترونية متعددة ويوفر نظامًا مبسطًا لإدارة المبيعات والطلبات.
+
+                                    </div>
+                                </div>
+                                <a href="#" class="more_butn color-primary">
+                                    معرفة المزيد  <i class="fa-regular fa-angle-left"></i>
+                                </a>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Start section -->
+        <section class="why_sec section" id="why_sec">
+            <div class="container">
+                <div class="sec_head text-center mb-5">
+                    <img src="{{ asset_path }}images/icon-2.svg" class="icon mb-3" alt="" />
+                    <h4 class="subtitle color-primary mb-3"> بكل بساطة   </h4>
+                    <h1 class="title fw-bold color-secondary mb-3"> لماذا تختار أُسس </h1>
+                    <div class="p">
+                        أُسس اختيارك الأفضل لتنظيم تجربة تعليمية وتدريبية احترافية
+                    </div>
+                </div>
+                <div class="row">
+                    {% for f in content.features %}
+                    <div class="col-lg-4">
+                        <div class="item">
+                            <img src="{{ f.image }}" class="icon" alt=" " />
+                            <h2 class="title fw-bold color-secondary"> {{ _(f.title) }} </h2>
+                            <div class="p">
+                                {{ _(f.description) }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- <div class="col-lg-4">
+                        <div class="item">
+                            <img src="{{ asset_path }}images/icons/why-1.svg" class="icon" alt=" " />
+                            <h2 class="title fw-bold color-secondary"> " أُسس" لتجربة أفضل <br> دائمًا </h2>
+                            <div class="p">
+                                في "أُسس"، نضع تجربة العملاء في مقدمة أولوياتنا. نعمل باستمرار على تحديد التحديات التي تواجه مستخدمينا وتطوير حلول مبتكرة لجعل المنصة أكثر سهولة وفعالية.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="item">
+                            <img src="{{ asset_path }}images/icons/why-2.svg" class="icon" alt=" " />
+                            <h2 class="title fw-bold color-secondary"> " أُسس" تقدم لك باقات اشتراك تلبي احتياجاتك بالكامل </h2>
+                            <div class="p">
+                                لماذا تدفع مقابل خدمات قد لا تحتاجها؟ في "أُسس"، نوفر باقات اشتراك متنوعة تناسب جميع الاحتياجات بمزايا تصاعدية، مما يتيح لك اختيار الباقة المثالية لاستخدامك.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="item">
+                            <img src="{{ asset_path }}images/icons/why-3.svg" class="icon" alt=" " />
+                            <h2 class="title fw-bold color-secondary"> خدمة عملاء تساعدك في كل خطوة </h2>
+                            <div class="p">
+                                فريق خدمة عملاء زامن يتمتعون بخبرات طويلة واستعداد دائم على مدار الساعة طوال أيام الأسبوع لتقديم المساعدة لك قبل وأثناء استمتاعك بخدماتنا بالإضافة إلى خدمة ما بعد البيع؛ لتحظى بتجربة متكاملة.
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Start section -->
+        <section class="join_sec section">
+            <div class="container">
+                <div class="inner">
+                    <div class="zi_5 row align-items-center">
+                        <div class="col-lg-6">  
+                            <div class="txt_box">
+                                <h1 class="title fw-bold color-primary"> منصّة متكاملة لتقديم الخدمات الرقميّة </h1>
+                                <div class="p">
+                                    نظّم دوراتك التدريبيّة، وبيع خدماتك الرقميّة، وقدّم استشاراتك المهنيّة وتحكّم في كل معاملاتك الماليّة في منصّة واحدة!
+                                </div>
+                                <a href="#" class="butn primary_butn butn_w_arrow ">
+                                    <span> إبدأ تجربتك الآن     </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <img src="{{ asset_path }}images/join-1.svg" class="secImg" alt="" />
+                        </div>
+                    </div>
+                    <img src="{{ asset_path }}images/pattern-1.svg" class="pattern" alt="">
+                </div>
+            </div>
+        </section>
+
+        <!-- Start section -->
+        <section class="sol_sec section" id="sol_sec">
+            <div class="container">
+                <div class="sec_head text-center mb-5">
+                    <h4 class="subtitle color-primary mb-3"> الحلول </h4>
+                    <h1 class="title fw-bold color-secondary mb-3"> من الخيال الي الواقع </h1>
+                    <div class="p">
+                        أُسس اختيارك الأفضل لتنظيم تجربة تعليمية وتدريبية احترافية
+                    </div>
+                </div>
+                <div class="row">
+                    {% for s in content.solutions %}
+                    <div class="col-lg-4">
+                        <div class="item">
+                            <img src="{{ s.image }}" class="icon" alt="" />
+                            <div class="p">
+                                {{ _(s.title) }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- <div class="col-lg-4">
+                        <div class="item">
+                            <img src="{{ asset_path }}images/icons/solutions/1.svg" class="icon" alt="" />
+                            <div class="p">
+                                سهولة تخزين المنتج السعودي للتاجر من خلال الربط مع مقدين خدمات المخازن السحابية.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="item">
+                            <img src="{{ asset_path }}images/icons/solutions/2.svg" class="icon" alt="" />
+                            <div class="p">
+                                سهولة وامان عملية الدفع للتاجر السعودي من خلال الربط مع مقدمين خدمات الدفع الالكتروني.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="item">
+                            <img src="{{ asset_path }}images/icons/solutions/3.svg" class="icon" alt="" />
+                            <div class="p">
+                                سهولة توصيل المنتج السعودي للمشتري من خلال الربط مع مقدمين خدمات التوصيل للمنتجات.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="item">
+                            <img src="{{ asset_path }}images/icons/solutions/4.svg" class="icon" alt="" />
+                            <div class="p">
+                                تطوير المنتجات السعودية وتشجيع المستهلك للمخرجات السعودية لندرتها وجودتها.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="item">
+                            <img src="{{ asset_path }}images/icons/solutions/5.svg" class="icon" alt="" />
+                            <div class="p">
+                                تقديم خدمات مابعد البيع للمنتج (الضمان، سياسة الاستبدال)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="item">
+                            <img src="{{ asset_path }}images/icons/solutions/6.svg" class="icon" alt="" />
+                            <div class="p">
+                                نظام متكامل لإدارة النشاط الإلكتروني في مجالات التي يفتقر لها المجتمع.
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <img src="{{ asset_path }}images/features_bg.png" class="bg" alt="">
+        </section>
+
+        
+        <!-- Start section -->
+        <section class="partners_sec section">
+            <div class="container">
+                <div class="sec_head text-center mb-5">
+                    <h4 class="subtitle color-primary mb-3"> شركاء النجاح     </h4>
+                    <h1 class="title fw-bold color-secondary mb-3"> عملاء راضون في مختلف المجالات    </h1>
+                    <div class="p">
+                        نعتزّ بعملنا مع العديد من المؤسسات المرموقة في سبيل توفير تجربة رقميّة مميزة لهم.
+                    </div>
+                </div>
+                <div class="swiper-container partners_swiper">
+                    <div class="swiper-wrapper">
+                        {% for p in content.partners %}
+                        {% if p.link %}
+                        <a class="swiper-slide" href="{{ p.link }}">
+                            <div class="item">
+                                <img src="{{ p.image }}" class="logo" alt="{{ p.name }}" />
+                            </div>
+                        </a>
+                        {% else %}
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <img src="{{ p.image }}" class="logo" alt="{{ p.name }}" />
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        <!-- <div class="swiper-slide">
+                            <div class="item">
+                                <img src="{{ asset_path }}images/partner-1.svg" class="logo" alt="" />
+                            </div>
+                        </div>
+                         <div class="swiper-slide">
+                            <div class="item">
+                                <img src="{{ asset_path }}images/partner-2.svg" class="logo" alt="" />
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <img src="{{ asset_path }}images/partner-3.svg" class="logo" alt="" />
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <img src="{{ asset_path }}images/partner-4.svg" class="logo" alt="" />
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <img src="{{ asset_path }}images/partner-5.svg" class="logo" alt="" />
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <img src="{{ asset_path }}images/partner-6.svg" class="logo" alt="" />
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </section>
+        
+        <!-- Start section -->
+        {% if feedback|length > 0 %}
+        <section class="feedback_sec section">
+            <div class="container">
+                <div class="sec_head text-center mb-5">
+                    <h4 class="subtitle color-primary mb-3"> أراء العملاء       </h4>
+                    <h1 class="title fw-bold color-secondary mb-3">عملاؤنا يشاركون قصص نجاحهم   </h1>
+                </div>
+                <div class="swiper-container feedback_swiper">
+                    <div class="swiper-wrapper">
+                        {% for f in feedback %}
+                        {% set rating = (f.rating * 5 + 0.99)|int %}
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <div class="feedback_item">
+                                    <img src="{{ f.image }}" class="avatar" alt="" />
+                                    <div class="content">
+                                        <div class="stars mb-3">
+                                            {% for r in range(0, rating) %}
+                                            <i class="fa-solid fa-star active"></i>
+                                            {% endfor %}
+                                            {% for r in range(rating, 5) %}
+                                            <i class="fa-solid fa-star"></i>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="p">
+                                            {{ f.feedback }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <h6 class="name color-primary"> {{ f.client_name }} </h6>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+    <!-- Start footer -->
+    {% include 'www/share/osus_footer.html' %}
+
+</div>
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    <!-- loading -->
+    <!-- <div id="preloader">
+        <div id="loading-wrapper" class="show">
+            <div id="loading-text"> <img src="icon.png" alt=""> </div>
+            <div id="loading-content"></div>
+        </div>
+    </div> -->
+
+    <!--Js Files & Libraries-->
+    {% include 'www/share/js.html' %}
+</body>
+</html>

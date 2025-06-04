@@ -1,0 +1,125 @@
+{% set asset_path = '../assets/moneymaker/training_platform/' %}
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> Survey </title>
+    <!--Page Icon-->
+    <link rel="shortcut icon" href="{{ content.icon_image }}" type="image/x-icon" title="Favicon" sizes="16x16" />
+
+    <!--Bootstrap with RTL-->
+    {% include 'www/training_shared/styles.html' %}
+</head>
+<body class="">
+
+    <!--Start navs-container -->
+    <div class="navs-container">
+        {% include 'www/training_shared/top_nav.html' %}
+
+        <!--Start main-nav-->
+        {% include 'www/training_shared/main_nav.html' %}
+    </div>
+
+    <main>
+        <!-- Start section -->
+        {% with title = '{{الإستبيان}}' %}
+        {% include 'www/training_shared/page_header.html' %}
+        {% endwith %}
+
+
+        <!-- Start section -->
+        <section class=" survey_pg section">
+            <div class="container">
+                <div class="sec_head text-center mb-5">
+                    <h6 class="subtitle fs-5 color-primary">
+                        <span class="line_w_circle me-3"></span>
+                        <span class="readable"> الاستبيان </span>
+                        <span class="line_w_circle ms-3"></span>
+
+                    </h6>
+                    <h1 class="mt-4  w-fit mx-auto readable"> 
+                        استبيان نهاية الدورة
+                    </h1>
+                </div>
+                <form id="survey-form" data-survey="{{course.course.survey_template}}">
+                    <div class="form_box col-lg-10 mx-auto">
+                        {% for item in course.survey %}
+                        {% set outer_loop = loop %}
+                        {% if item.type == 'Choice' %}
+                        <div class="ques_box sur-form" data-q-type="{{item.type}}" data-q="{{item.name}}">
+                            <h6 class="title fw-bold mb-4 readable"> {{_(item.question)}} </h6>
+                            {% for opt in item.options %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault-{{outer_loop.index}}-{{loop.index}}" data-q="{{item.question}}" data-ans="{{opt.option}}">
+                                <label class="form-check-label readable" for="flexRadioDefault-{{outer_loop.index}}-{{loop.index}}">
+                                    {{_(opt.option)}}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        
+                        {% elif item.type == 'Multichoice' %}
+                        <div class="ques_box sur-form" data-q-type="{{item.type}}" data-q="{{item.name}}">
+                            <h6 class="title fw-bold mb-4"> {{_(item.question)}} </h6>
+                            {% for opt in item.options %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault-{{outer_loop.index}}-{{loop.index}}" data-q="{{item.question}}" data-ans="{{opt.option}}">
+                                <label class="form-check-label readable" for="flexRadioDefault-{{outer_loop.index}}-{{loop.index}}">
+                                    {{_(opt.option)}}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        {% else %}
+                        <div class="ques_box sur-form" data-q-type="{{item.type}}" data-q="{{item.name}}">
+                            <h6 class="title fw-bold mb-4 readable"> {{_(item.question)}} </h6>
+                            <div class="form-group">
+                                <textarea class="form-control form-answer" data-q="{{_(item.question)}}" placeholder="اكتب هنا ..." rows="5"></textarea>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-lg-2 mx-auto">
+                        <button type="button" class="butn primary_butn butn_w_arrow mt-5 w-100" id="submit-survey-btn">
+                            <span> تأكيد </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Start footer -->
+    {% include 'www/training_shared/footer.html' %}
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    {% include 'www/training_shared/reader.html' %}
+
+    <!-- loading -->
+    <!-- <div id="preloader">
+        <div id="loading-wrapper" class="show">
+            <div id="loading-text"> <img src="icon.png" alt=""> </div>
+            <div id="loading-content"></div>
+        </div>
+    </div> -->
+
+    <!--Js Files & Libraries-->
+    {% include 'www/training_shared/scripts.html' %}
+    <script src="../{{content.brand_name}}/survey_c.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,208 @@
+{% set asset_path = "../assets/moneymaker/New/" %}
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> الملف الشخصي </title>
+    <!--Page Icon-->
+    {% include 'www/share/head.html' %}
+</head>
+<body>
+<div id="scrollsmoother-container">
+
+    <!--Start navs-container -->
+    {% include 'www/share/osus_nav.html' %}
+
+    <main>
+
+        <!-- Start section -->
+        <section class="profile_pg section">
+            <div class="container">
+                <div class="sec_head text-center0 mb-5   "  >
+                    <h4 class="subtitle color-primary mb-3"> الملف الشخصي   </h4>
+                    <h1 class="title fw-bold color-secondary mb-4">   الملف الشخصي للشركات   </h1>
+                </div>
+
+                <ul class="nav justify-content-center nav-pills mb-5" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-tab1-tab" data-bs-toggle="pill" data-bs-target="#pills-tab1" type="button" role="tab" aria-controls="pills-tab1" aria-selected="true">البيانات الاساسية </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-tab2-tab" data-bs-toggle="pill" data-bs-target="#pills-tab2" type="button" role="tab" aria-controls="pills-tab2" aria-selected="false">الاشتراكات</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-tab1" role="tabpanel" aria-labelledby="pills-tab1-tab">
+                        <div class="data_tab">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="box border mb-5 p-5">
+                                        <h4 class="subtitle color-primary mb-5 fw-bold fs-5 ">  البيانات الشخصية  </h4>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="data_box">
+                                                    <p class="label"> اسم المنشأة </p>
+                                                    <p class="data"> {{ profile.profile.institution }} </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="data_box">
+                                                    <p class="label"> بريدك الالكتروني </p>
+                                                    <p class="data"> {{ profile.profile.email }} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="box border mb-5 p-5">
+                                        <h4 class="subtitle color-primary mb-5 fw-bold fs-5 "> المعلومات البنكية </h4>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="data_box">
+                                                    <p class="label"> إسم صاحب الحساب </p>
+                                                    <p class="data"> {{ profile.profile.holder_name }} </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="data_box">
+                                                    <p class="label"> إسم البنك </p>
+                                                    <p class="data"> {{ profile.profile.bank_name }} </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="data_box">
+                                                    <p class="label"> الآيبان     </p>
+                                                    <p class="data"> {{ profile.profile.iban }} </p>
+                                                </div>
+                                            </div>
+                                     
+
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-lg-3 mt-2">
+                                    <a href="/app" class="butn primary_border_butn w-100">
+                                        <span>لوحة التحكم</span>
+                                    </a>
+                                </div>
+                                <div class="col-lg-3 mt-2">
+                                    <a href="edit_comp.html" class="butn primary_butn submit_butn w-100">
+                                        <span>تعديل البيانات</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-tab2" role="tabpanel" aria-labelledby="pills-tab2-tab">
+                        <div class="serv_tab service_sec ">
+                            <div class="row">
+                                {% for s in subs %}
+                                <div class="col-lg-6">
+                                    <div class="serv_box pb-4">
+                                        <div class="content">
+                                            <img src="{{ asset_path }}images/icons/services/1.svg" class="icon" alt="" />
+                                            <h5 class="title color-secondary fw-bold"> {{ s.package_title }} </h5>
+                                      
+                                            <div class="subsc_box mt-4">
+                                                <div class="item row">
+                                                    <div class="label col-6"> 	تاريخ بداية الاشتراك </div>
+                                                    <div class="data col-6"> {{ s.subscription_date }} </div>
+                                                </div>
+                                                <div class="item row">
+                                                    <div class="label col-6"> 	تاريخ نهاية الاشتراك </div>
+                                                    <div class="data col-6"> {{ s.end_date }} </div>
+                                                </div>
+                                                <div class="item row">
+                                                    <div class="label col-6"> حالة الاشتراك </div>
+                                                    {% if s.active == 1 %}
+                                                    <div class="data col-6"> ساري </div>
+                                                    {% else %}
+                                                    <div class="data col-6"> منتهي </div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item row">
+                                                    <div class="label col-6"> نوع الإشتراك </div>
+                                                    {% if s.payment_cycle == 'Monthly' %}
+                                                    <div class="data col-6"> شهري </div>
+                                                    {% else %}
+                                                    <div class="data col-6"> سنوي </div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item row">
+                                                    <div class="label col-6"> فاتورة الدفع </div>
+                                                    <a href="#" class="data color-primary underline col-6"> افتح </a >
+                                                </div>
+                                            </div>
+
+                                            <div class="form-check my-4">
+                                                <input class="form-check-input" type="checkbox" value="" id="auto-renew-check-{{loop.index}}" data-sub-name="{{ s.name }}"
+                                                {% if s.auto_renewal == 1 %} checked {% endif %}>
+                                                <label class="form-check-label" for="auto-renew-check-{{loop.index}}">
+                                                    التجديد التلقائي للاشترك 
+                                                </label>
+                                            </div>
+
+                                            <div class="butns pt-4 mt-4 border-top d-flex justify-content-center">
+                                                <a href="/packages" class="butn gray_butn me-3">
+                                                    تغيير الباقة
+                                                </a>
+                                                {% if s.active == 1 %}
+                                                    {% if s.status == 'Trial' %}
+                                                    <button class="butn primary_border_butn " data-sub-name="{{ s.name }}" onclick="cancelSub(this)">
+                                                        إلغاء الاشتراك    
+                                                    </button>
+                                                    {% endif %}
+                                                {% else %}
+                                                <button class="butn primary_butn " data-sub-name="{{ s.name }}" onclick="renewSub(this)">
+                                                    تجديد الاشتراك    
+                                                </button>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Start footer -->
+    {% include 'www/share/osus_footer.html' %}
+
+</div>
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    <!-- loading -->
+    {% include 'www/share/loading.html' %}
+
+    <!--Js Files & Libraries-->
+    {% include 'www/share/js.html' %}
+    <script src="profile_comp.js"></script>
+</body>
+</html>

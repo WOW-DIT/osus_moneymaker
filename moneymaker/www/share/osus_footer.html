@@ -1,0 +1,92 @@
+{% set asset_path = "../assets/moneymaker/New/" %}
+<footer class="footer section pb-4">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-3">
+                <div class="content">
+                    <img src="{{ asset_path }}images/logo_white.svg" class="logo" alt="" />
+                    <h5 class="fs-4 mt-4 text-white fw-bold"> بوابتك لعالم المنتجات الرقمية </h5>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="content">
+                    <div class="contact_links">
+                        <div class="item">
+                            <img src="{{ asset_path }}images/icons/footer-1.svg" class="icon" alt="" />
+                            <div class="txt_cont">
+                                <p class="label"> هل لديك أي أسئلة؟ </p>
+                                <p class="data"> {{ content.main.whatsapp }} </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="{{ asset_path }}images/icons/footer-2.svg" class="icon" alt="" />
+                            <div class="txt_cont">
+                                <p class="label"> او راسلنا عبر البريد الالكتروني </p>
+                                <p class="data"> {{ content.main.email }} </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="{{ asset_path }}images/icons/footer-3.svg" class="icon" alt="" />
+                            <div class="txt_cont">
+                                <p class="label"> او زرنا في المقر الرسمي </p>
+                                <p class="data"> {{ _(content.main.address) }} </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="social_links d-flex ">    
+                        <a href="{{ content.main.instagram }}" target="_blank" > <i class="fa-brands fa-instagram"></i> </a>
+                        <a href="{{ content.main.x }}" target="_blank" > <i class="fa-brands fa-x-twitter"></i> </a>
+                        <a href="{{ content.main.facebook }}" target="_blank" > <i class="fa-brands fa-facebook-f"></i> </a>
+                        <a href="{{ content.main.linkedin }}" target="_blank" > <i class="fa-brands fa-linkedin-in"></i> </a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="content">
+                    <h5 class="title mb-4 fw-bold"> روابط تهمك </h5>
+                    <div class="links">
+                        <a href="/#service_sec"> الخدمات </a>
+                        <a href="/#sol_sec"> الحلول </a>
+                        <a href="/packages"> الباقات </a>
+                        <a href="/contact"> تواصل معانا </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="content">
+                    <h5 class="title mb-4 fw-bold"> القائمة البريدية </h5>
+                    <h5 class="text-white fw-bold ">
+                        تابعنا ليصلك كل جديد في عالم المنتجات الرقمية!
+                    </h5>
+
+                    <form class="newsletter_form mt-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="   ادخل بريدك الالكتروني " />
+                            <button class="submit_butn butn primary_butn w-100 mt-2"> أرسل <i class="fa-solid fa-paper-plane me-0 ms-2"></i> </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="foot row mt-5">
+            <div class="col-lg-6">
+                <div class="p text-white">
+                    جميع الحقوق محفوظة © لأسس - 2025
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="links text-end text-white">
+                    <a href="#" class="text-white"> سياسة الخصوصية </a>
+                    <a href="#" class="text-white ms-5"> اتفاقية الاستخدام </a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <img src="{{ asset_path }}images/footer_bg.png" class="bg" alt="" />
+    <img src="{{ asset_path }}images/pattern_footer.svg" class="pattern" alt="">
+</footer>

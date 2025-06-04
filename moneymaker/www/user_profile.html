@@ -1,0 +1,25 @@
+{% if profile.profile.user_type == 'Individual' %}
+{% set edit_url = "/edit_user" %}
+{% else %}
+{% set edit_url = "/edit_comp" %}
+{% endif %}
+
+<div
+    id="snackbar"
+    class="snackbar {% if profile.is_completed == False %} show {% endif %}"
+    >
+    بيانات الحساب غير مكتملة:   
+    <a href="{{ edit_url }}">الملف الشخصي</a>
+</div>
+
+{% if logged_in %}
+
+{% if profile.profile.user_type == 'Institution' %}
+{% include 'www/profile_comp.html' %}
+{% else %}
+{% include 'www/profile_user.html' %}
+{% endif %}
+
+{% else %}
+{% include 'www/login.html' %}
+{% endif %}

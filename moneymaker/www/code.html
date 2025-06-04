@@ -1,0 +1,131 @@
+{% set asset_path = "../assets/moneymaker/New/" %}
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> Osus | Home  </title>
+    <!--Page Icon-->
+    {% include 'www/share/head.html' %}
+</head>
+<body>
+<div id="scrollsmoother-container">
+
+    <!--Start navs-container -->
+    {% include 'www/share/osus_nav.html' %}
+
+    <main>
+
+        <!-- Start section -->
+        <section class="register_pg section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="content_box">
+                            <div class="sec_head mb-5">
+                                <h4 class="subtitle color-primary mb-3">  كود التحقق       </h4>
+                                <h1 class="title fw-bold color-secondary mb-4">     بوابتك لعالم المنتجات الرقمية   </h1>
+                                <div class="p">
+                                    ادخل كود التحقق المرسل  إلى <b class="color-primary">mail@test.com</b>
+                                </div>
+                            </div>
+                            <form>
+                                <div class="form-group">
+                                    <div class="code-group mb-4" dir="ltr">
+                                        <input type="text" class="form-control" maxlength="1" placeholder="" autofocus>
+                                        <input type="text" class="form-control" maxlength="1" placeholder="">
+                                        <input type="text" class="form-control" maxlength="1" placeholder="">
+                                        <input type="text" class="form-control" maxlength="1" placeholder="">
+                                    </div>
+                                </div>
+
+                                <div class=" text-center w-100 my-5  ">
+                                    <p class="txt_code m-0 fs-6">ستنتهي صلاحية الكود بعد  <strong class="count_down color-primary ms-1">19</strong> </p>
+                                    <a href="#" class="resend_link underline color-primary mt-3 d-block  fs-6">إعادة إرسال الكود</a>
+                                </div>
+                           
+
+
+                                <button class="butn primary_butn submit_butn w-100">
+                                    <span> تأكيد   </span>
+                                </button>
+
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="{{ asset_path }}images/login-1.svg" class="secImg" alt="" />
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Start footer -->
+    {% include 'www/share/osus_footer.html' %}
+
+</div>
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    <!-- loading -->
+    <!-- <div id="preloader">
+        <div id="loading-wrapper" class="show">
+            <div id="loading-text"> <img src="icon.png" alt=""> </div>
+            <div id="loading-content"></div>
+        </div>
+    </div> -->
+
+    <!--Js Files & Libraries-->
+    {% include 'www/share/js.html' %}
+    <script>
+        document.querySelectorAll('.code-group input').forEach((input, index, inputs) => {
+            input.addEventListener('input', (e) => {
+                // Move to the next input if a valid number is entered
+                if (e.target.value.match(/^\d$/)) {
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                } else {
+                    e.target.value = ""; // Clear invalid input
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === "Backspace" && input.value === "") {
+                    // Move to the previous input if backspace is pressed on an empty field
+                    if (index > 0) {
+                        inputs[index - 1].focus();
+                        inputs[index - 1].value = ""; // Clear the previous input
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        let i = 120;
+        let a = setInterval(function() {
+            if (i < 10)
+                document.querySelector('.count_down').textContent = `0${i}`;
+            else {
+                document.querySelector('.count_down').textContent = `${i}`
+            }
+            i--;
+            if (i < 0) {
+                clearInterval(a);
+            }
+        }, 1000)
+    </script>
+</body>
+</html>

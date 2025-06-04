@@ -1,0 +1,211 @@
+{% set asset_path = '../assets/moneymaker/training_platform/' %}
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> Support </title>
+    <!--Page Icon-->
+    <link rel="shortcut icon" href="{{ content.icon_image }}" type="image/x-icon" title="Favicon" sizes="16x16" />
+
+    <!--Bootstrap with RTL-->
+    {% include 'www/training_shared/styles.html' %}
+
+</head>
+<body class="">
+
+    <!--Start navs-container -->
+    <div class="navs-container">
+        {% include 'www/training_shared/top_nav.html' %}
+
+        <!--Start main-nav-->
+        {% include 'www/training_shared/main_nav.html' %}
+    </div>
+
+
+    {% set months = [
+        '', 'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+        'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
+    ] %}
+
+    <main>
+
+        <!-- Start section -->
+        {% with title = 'تفاصيل التذكرة' %}
+        {% include 'www/training_shared/page_header.html' %}
+        {% endwith %}
+
+        <!-- Start section -->
+        <section class="support_det_pg section">
+            <div class="container">
+                <div class="sec_head text-center mb-5">
+                    <h6 class="subtitle fs-5 color-primary">
+                        <span class="line_w_circle me-3"></span>
+                        <span class=""> الدعم الفني </span>
+                        <span class="line_w_circle ms-3"></span>
+
+                    </h6>
+                    <h1 class="mt-4 "> 
+                        تذاكر الدعم الفني    
+                    </h1>
+                </div>
+
+
+                {% set details = issue.details %}
+                {% set day = details.creation.strftime('%d') %}
+                {% set month = months[details.creation.month] %}
+                {% set year = details.creation.strftime('%Y') %}
+                {% set time = details.creation.strftime('%I:%M %p') %}
+
+                <div class="order-details" >
+                    <div class="col-lg-10 mx-auto">
+                        <div class="order-head">
+                            <div class="d-flex justify-content-between">
+                                <p> رقم التذكرة : <b>{{details.name}}</b></p>
+                                <p> موضوع التذكرة :  <b>{{details.subject}}</b></p>
+                                {% if details.status == 'Open' %}
+                                <p> حالة التذكرة :  <b>مفتوحة</b></p>
+                                {% else %}
+                                <p> حالة التذكرة :  <b>مغلقة</b></p>
+                                {% endif %}
+                            </div>
+                    
+                        </div>
+                    </div>
+                    <div class="order-body">
+                        <div class="ticket_box">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="data_group">
+                                        <h6 class="title mb-4"> نص الرسالة  </h6>
+
+                                        <div class="msgs_box">
+                                            <div class="data msg_data_box">
+                                                <p class="date mb-2">
+                                                    <i class="fa-light fa-calendar-days"></i> {{ day }} {{ month }} {{ year }} - {{ time }}
+                                                </p>    
+                                                {{details.description}}
+                                            </div>
+                                            {% if replies|length > 0 %}
+                                            <button type="button" class="msgs_butns color-primary underline fw-bold w-fit d-block mx-auto mt-4"  data-bs-toggle="modal" data-bs-target="#repliesModal"> 
+                                                الردود السابقة 
+                                            </button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                {% if issue.attaches|length > 0 %}
+                                <div class="col-lg-12">
+                                    <div class="data_group">
+                                        <h6 class="title"> استعراض المرفقات </h6>
+                                        <div class="data">
+                                            <div class="attachments d-flex flex-wrap">
+                                                {% for at in issue.attaches %}
+                                                <div class="d-flex flex-column align-items-center">
+                                                    <a href="{{at.file_url}}">
+                                                        {% if at.file_type == "PDF" %}
+                                                        <img src="{{ asset_path }}images/pdf_img.png" class="sm_Img secImg" alt=""/>
+                                                        {% elif at.file_type == "PNG" or at.file_type == "JPG" or at.file_type == "JPEG" %}
+                                                        <img src="{{at.file_url}}" class="sm_Img secImg" alt=""/>
+                                                        {% else %}
+                                                        <img src="{{ asset_path }}images/courses-2.jpg" class="sm_Img secImg" alt=""/>
+                                                        {% endif %}
+                                                    </a>
+                                                    <div class="readable">
+                                                        {{at.file_name}}
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if details.status != 'Closed' and details.status != 'Resolved' %}
+                <div class="msg_box mt-5 pt-4 col-lg-10 mx-auto">
+                    <h1 class="text-center fs-3 fw-bold mb-4 pb-2 "> 
+                        ارسل رسالة اخرى 
+                    </h1>
+                    <form id="ticket-form">
+                        <div class="form-group">
+                            <textarea id="message" name="message" class="form-control" placeholder="نص الرسالة" rows="7"></textarea>
+                        </div>
+
+                        <div class="col-lg-2 mx-auto">
+                            <button class="butn primary_butn butn_w_arrow mt-5  w-100 ">
+                                <span> ارسال </span>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal repliesModal fade" id="repliesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <div class="modal-body">
+                    <h6 class="subtitle fs-6 color-primary text-center mb-4">
+                        <span class="line_w_circle me-3"></span>
+                        <span class=" readable"> الردود السابقة </span>
+                        <span class="line_w_circle ms-3"></span>
+                    </h6>
+
+                    <div class="msgs_box">
+                        {% for rep in replies %}
+
+                        {% set day = rep.creation.strftime('%d') %}
+                        {% set month = months[rep.creation.month] %}
+                        {% set year = rep.creation.strftime('%Y') %}
+                        {% set time = rep.creation.strftime('%I:%M %p') %}
+                        <div class="data msg_data_box">
+                            <p class="date mb-2">
+                                <i class="fa-light fa-calendar-days"></i> {{ day }} {{ month }} {{ year }} - {{ time }}
+                            </p>    
+                            {{rep.description}}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start footer -->
+    {% include 'www/training_shared/footer.html' %}
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    {% include 'www/training_shared/reader.html' %}
+
+    <!-- loading -->
+    {% with logo = content.white_logo %}
+    {% include 'www/training_shared/loader.html' %}
+    {% endwith %}
+
+    <!--Js Files & Libraries-->
+    {% include 'www/training_shared/scripts.html' %}
+    <script src="../{{content.brand_name}}/support_dett.js"></script>
+
+</body>
+</html>

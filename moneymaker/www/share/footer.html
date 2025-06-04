@@ -1,0 +1,59 @@
+<footer class="footer">
+    <div class="container">
+        <div class="row justify-content-between gx-0">
+            <div class="col-lg-3">
+                <div class="foot-info">
+                    <a href="#" class="logo">
+                        <img src="{{content.white_logo}}" alt="" class="view-element" data-element-field="white_logo">
+                    </a>
+                    <div class="text view-element readable" data-element-field="footer_text"> {{ _(content.footer_text) }} </div>
+                    <div class="social-links">
+                        <a href="{{content.facebook}}" class="view-element" data-element-field="facebook"> <i class="fab fa-facebook-f"></i> </a>
+                        <a href="{{content.instagram}}" class="view-element" data-element-field="instagram"> <i class="fab fa-instagram"></i> </a>
+                        <a href="{{content.twitter}}" class="view-element" data-element-field="twitter"> <i class="fab fa-x-twitter"></i> </a>
+                        <a href="{{content.youtube}}" class="view-element" data-element-field="youtube"> <i class="fab fa-youtube"></i> </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="links-group mt-5 mt-lg-0">
+                    <h6 class="sub-title readable"> {{_("Quick Links")}} </h6>
+                    <ul class="links">
+                        <li> <a href="#" class="readable"> {{_("About")}} </a> </li>
+                        <li> <a href="#" class="readable"> {{_("Contact Us")}} </a> </li>
+                        <li> <a href="#" class="readable"> {{_("Courses")}} </a> </li>
+                        <li> <a href="#" class="readable"> {{_("Faq")}} </a> </li>
+                        <li> <a href="#" class="readable"> {{_("Privacy Policy")}} </a> </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="links-group mt-5 mt-lg-0">
+                    <h6 class="sub-title readable"> {{_("Courses")}} </h6>
+                    <ul class="links">
+                        {% for cat in category %}
+                        <li> <a href="#" class="readable"> {{_(cat.category)}} </a> </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="links-group mt-5 mt-lg-0">
+                    <h6 class="sub-title readable"> {{_("Contact Info")}} </h6>
+                    <ul class="links">
+                        <li> <a href="#"> <span class="icon me-2"> <i class="fal fa-envelope"></i> </span> <span class="txt view-element" data-element-field="email"> {{content.email}} </span> </a> </li>
+                        <li> <a href="#"> <span class="icon me-2"> <i class="fal fa-phone-volume"></i> </span> <span class="txt view-element" data-element-field="phone"> {{content.phone}} </span> </a> </li>
+                        <li> <a href="#"> <span class="icon me-2"> <i class="fal fa-map-marker"></i> </span> <span class="txt view-element" data-element-field="address"> {{content.address}} </span> </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="foot">
+        <div class="item readable"> {{ _("All rights reserved © Osus - Designed and developed") }} <a href="#"> <img src="../assets/moneymaker/osus/images/WOW-Logo.png" alt="" class="alyom-logo"> </a> </div>
+        <div class="vision-img">
+            <img src="../assets/moneymaker/osus/images/2030_1.png" alt="" class="img">
+        </div>
+        <div class="item readable"> {{ _("Powered By") }} <a href="#"> <img src="../assets/moneymaker/osus/images/logo_wh.svg" alt="" class="alyom-logo"> </a> </div>
+    </div>
+</footer>

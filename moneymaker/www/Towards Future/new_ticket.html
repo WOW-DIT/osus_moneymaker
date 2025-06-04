@@ -1,0 +1,111 @@
+{% set asset_path = '../assets/moneymaker/training_platform/' %}
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> New Ticket </title>
+    <!--Page Icon-->
+    <link rel="shortcut icon" href="{{ content.icon_image }}" type="image/x-icon" title="Favicon" sizes="16x16" />
+
+    <!--Bootstrap with RTL-->
+    {% include 'www/training_shared/styles.html' %}
+</head>
+<body class="">
+
+    <!--Start navs-container -->
+    <div class="navs-container">
+        {% include 'www/training_shared/top_nav.html' %}
+
+        <!--Start main-nav-->
+        {% include 'www/training_shared/main_nav.html' %}
+        
+    <main>
+
+        <!-- Start section -->
+        {% with title = 'إنشاء تذكرة' %}
+        {% include 'www/training_shared/page_header.html' %}
+        {% endwith %}
+
+
+        <!-- Start section -->
+        <section class="ticket_pg contact_pg section">
+            <div class="container">
+                <div class="form_box  col-lg-11 mx-auto  " >
+                    <div class="sec_head text-center mb-5">
+                        <h6 class="subtitle fs-5 color-primary">
+                            <span class="line_w_circle me-3"></span>
+                            <span class="readable"> إنشاء تذكرة </span>
+                            <span class="line_w_circle ms-3"></span>
+    
+                        </h6>
+                        <h1 class="mt-4 fs-2 w-fit mx-auto readable"> 
+                            انشئ تذكرتك وسيتم التواصل معك
+                        </h1>
+                    </div>
+
+                    <form id="ticket-form">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <input id="subject" name="subject" type="text" class="form-control readable" placeholder="موضوع الرسالة">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <textarea id="message" name="message" class="form-control readable" placeholder="نص الرسالة" rows="7"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="attachments_box">
+                                    <h6 class="readable"> المرفقات </h6>
+                                    <div class="attch_group">
+                                        <input type="text" id="example" value="" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-2 mx-auto">
+                                <button class="butn primary_butn butn_w_arrow mt-5  w-100 ">
+                                    <span class="readable"> ارسال </span>
+                                </button>
+                          
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Start footer -->
+    {% include 'www/training_shared/footer.html' %}
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    {% include 'www/training_shared/reader.html' %}
+
+    <!-- loading -->
+    {% with logo = content.white_logo %}
+    {% include 'www/training_shared/loader.html' %}
+    {% endwith %}
+
+    <!--Js Files & Libraries-->
+    {% include 'www/training_shared/scripts.html' %}
+    <script src="../{{content.brand_name}}/new_ticket.js"></script>
+    <script>
+        $("#example").uploader({
+            multiple:true,
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+            shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Hossam Mohamed" />
+    <link rel="shortcut icon" href="{{content.icon_image}}" title="Favicon" sizes="16x16" />
+
+    <!--With LTR -->
+    <link rel="stylesheet" href="../assets/moneymaker/osus/css/lib/bootstrap.min.css">
+    <!--  -->
+
+    <!--With RTL -->
+    <!-- <link rel="stylesheet" href="css/lib/bootstrap.rtl.min.css" /> -->
+    <!--  -->
+
+    <!-- google roboto font -->
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!--  -->
+
+
+    <link rel="stylesheet" href="../assets/moneymaker/osus/css/lib/animate.css" />
+    <link rel="stylesheet" href="../assets/moneymaker/osus/css/lib/jquery.fancybox.css" />
+    <link rel="stylesheet" href="../assets/moneymaker/osus/css/lib/swiper.min.css" />
+    <link rel="stylesheet" href="../assets/moneymaker/osus/css/lib/all.min.css" />
+    <link rel="stylesheet" href="../assets/moneymaker/osus/css/style.css" />
+    <style>
+        :root {
+            --mainColor: {{content.main_color}} !important;
+            --subColor: {{content.second_color}} !important;
+        }
+        .grad-color {
+            background-image: linear-gradient(104.23deg, {{content.gradient_color_1}} 1.55%, {{content.gradient_color_2}} 99.04%) !important;
+        }
+        footer {
+            background-color: {{content.header_color}} !important;
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="css/style_en.css"> -->
+    <title> Osus </title>
+
+</head>
+
+<body class="">
+    <!--Start navbar-->
+    <nav class="navbar navbar-expand-lg grad-color">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/{{content.brand_name}}">
+                <img src="../assets/moneymaker/osus/images/logo.png" alt="" class="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/{{content.brand_name}}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">about</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            courses
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/{{content.brand_name}}#courses">all courses</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            {% for item in category %}
+                            <li><a class="dropdown-item" href="/{{content.brand_name}}/?category={{item.category}}#courses">{{item.category}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">contact us</a>
+                    </li>
+                </ul>
+                <div class="side-nav">
+                    <form class="search-form d-flex" role="search">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        <button class="" type="submit"> <i class="fal fa-search"></i> </button>
+                    </form>
+                    {% if logged_in %}
+                    <div class="ms-3">
+                        <a class="butn-sim" href="https://osus.wowdigital.sa/app/user/{{user}}" role="button">
+                            <img src="../images/user.png" style="filter: invert(100%); width: 20px;" alt="user">
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="dropdown ms-3">
+                        <a class="dropdown-toggle butn-sim" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            login
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/login">login</a></li>
+                            <li><a class="dropdown-item" href="/student-applicant">register</a></li>
+                        </ul>
+                    </div>
+                    {% endif %}
+                    <a href="#" class="ms-5"> <i class="fal fa-globe"></i> AR </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--End-navbar-->
+
+
+    <!--Content-->
+
+    <main>
+        <!-- ---------- course details ----------- -->
+        <section class="course-details">
+            <div class="container">
+                <div class="main-info">
+                    <div class="info me-lg-3">
+                        <h4>End of the course survey</h4>
+                        <h2 class="title">{{course.course.name}}</h2>
+                    </div>
+                    <form action="#" id="survey-form">
+                        {% for item in course.survey %}
+                        {% set outer_loop = loop %}
+                        <div class="what-learn sur-form" data-q-type="{{item.type}}" data-q="{{item.name}}">
+                            
+                            <!-- <li> <input type="checkbox" class="checkbox" style="margin: 0 5px;"/> <span class="txt"> {{item.title}} </span> </li> -->
+                            <!-- <li class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin: 0 5px;">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    {{item.question}}
+                                </label>
+                            </li> -->
+                            <h4 st>{{item.question}}</h4>
+                            <hr>
+                            <br>
+                            
+                            {% if item.options != None and item.type != "Text" %}
+                            <ul class="form-answer" style="display: flex; flex-direction: column; gap: 20px;">
+                                {% for opt in item.options %}
+                                <li class="form-check">
+                                    <input class="form-check-input" style="border-color: grey;" type="{% if item.type == 'Multichoice' %}checkbox{% else %}radio{% endif %}" name="flexRadioDefault" id="flexRadioDefault-{{outer_loop.index}}-{{loop.index}}" data-q="{{item.question}}" data-ans="{{opt.option}}">
+                                    <label class="form-check-label" style="color: black; margin-left: 5px;" for="flexRadioDefault-{{outer_loop.index}}-{{loop.index}}">
+                                        {{opt.option}}
+                                    </label>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <textarea class="form-control form-answer" id="sadasd" data-q="{{item.question}}" style="background-color: white;" required ></textarea>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                        <div style="display: flex; justify-content: end;">
+                            <button type="button" class="butn mt-5 w-30 ps-" id="submit-survey-btn">
+                                <span class="txt">Submit</span>
+                                <span class="butn-icon">
+                                    <span class="butn-icon-inner"><i class="fal fa-arrow-right"></i></span>
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ---------- footer  ----------- -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row justify-content-between gx-0">
+                <div class="col-lg-3">
+                    <div class="foot-info">
+                        <a href="#" class="logo">
+                            <img src="{{content.white_logo}}" alt="">
+                        </a>
+                        <div class="text view-element" data-element-field="footer_text"> {{content.footer_text}} </div>
+                        <div class="social-links">
+                            <a href="{{content.facebook}}"> <i class="fab fa-facebook-f"></i> </a>
+                            <a href="{{content.instagram}}"> <i class="fab fa-instagram"></i> </a>
+                            <a href="{{content.twitter}}"> <i class="fab fa-x-twitter"></i> </a>
+                            <a href="{{content.youtube}}"> <i class="fab fa-youtube"></i> </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="links-group mt-5 mt-lg-0">
+                        <h6 class="sub-title"> Quick Links </h6>
+                        <ul class="links">
+                            <li> <a href="#"> about </a> </li>
+                            <li> <a href="#"> contact us </a> </li>
+                            <li> <a href="#"> courses </a> </li>
+                            <li> <a href="#"> faq </a> </li>
+                            <li> <a href="#"> privacy policy </a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="links-group mt-5 mt-lg-0">
+                        <h6 class="sub-title"> courses </h6>
+                        <ul class="links">
+                            <li> <a href="#"> business </a> </li>
+                            <li> <a href="#"> design </a> </li>
+                            <li> <a href="#"> photography & video </a> </li>
+                            <li> <a href="#"> development </a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="links-group mt-5 mt-lg-0">
+                        <h6 class="sub-title"> contact info </h6>
+                        <ul class="links">
+                            <li> <a href="#"> <span class="icon me-2"> <i class="fal fa-envelope"></i> </span> <span class="txt"> {{content.email}} </span> </a> </li>
+                            <li> <a href="#"> <span class="icon me-2"> <i class="fal fa-phone-volume"></i> </span> <span class="txt"> {{content.phone}} </span> </a> </li>
+                            <li> <a href="#"> <span class="icon me-2"> <i class="fal fa-map-marker"></i> </span> <span class="txt"> {{content.address}} </span> </a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="foot">
+            <div class="item"> All rights reserved © Osus - Designed and developed <a href="#"> <img src="../assets/moneymaker/osus/images/WOW-Logo.png" alt="" class="alyom-logo"> </a> </div>
+            <div class="vision-img">
+                <img src="../assets/moneymaker/osus/images/2030_1.png" alt="" class="img">
+            </div>
+            <div class="item"> powered by <a href="#"> <img src="../assets/moneymaker/osus/images/logo_wh.svg" alt="" class="alyom-logo"> </a> </div>
+        </div>
+    </footer>
+
+    <!--End-Contents-->
+
+    <!-- ------------ modals ----------- -->
+
+    <!-- ====== start to top button ====== -->
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+                style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;">
+            </path>
+        </svg>
+    </div>
+    <!-- ====== end to top button ====== -->
+    <!-- -------------- request ----------------- -->
+    <!-- <script src="js/lib/jquery-3.0.0.min.js"></script>
+    <script src="js/lib/jquery-migrate-3.0.0.min.js"></script>
+    <script src="js/lib/bootstrap.bundle.min.js"></script>
+    <script src="js/lib/wow.min.js"></script>
+    <script src="js/lib/jquery.fancybox.js"></script>
+    <script src="js/lib/swiper.min.js"></script>
+    <script src="js/lib/jquery.waypoints.min.js"></script>
+    <script src="js/lib/jquery.counterup.js"></script>
+    <script src="js/lib/back-to-top.js"></script>
+    <script src="js/main.js"></script> -->
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const course_id = urlParams.get('id');
+
+        const answerForms = document.querySelectorAll(".sur-form");
+        // const checkInputs = document.querySelectorAll(".form-check-input");
+        // const answerAreas = document.querySelectorAll(".answer-area");
+        const submitBtn = document.getElementById("submit-survey-btn");
+
+        submitBtn.onclick = submitSurvey
+
+        function submitSurvey() {
+            let questions = getAnswers()
+
+            fetch(`/api/method/moneymaker.www.Osus.course_survey.submitSurvey?id=${course_id}`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    data: {
+                        questions: questions
+                    }
+                }),
+                headers: {
+                  'Content-type': 'application/json; charset=UTF-8',
+                },
+            }).then((response) => response.json())
+            .then((json) => {
+                if(json && json.message !== null)
+                {
+                    const isSuccess = json.message.successful
+                    if(isSuccess === true) {
+                        location.href = json.message.certificate_url
+                    }
+                    console.log(json.message.message)
+                    
+
+                }
+            });
+        }
+
+        function getAnswers() {
+            let questions = {}
+            for(let form of answerForms) {
+                const question = form.getAttribute("data-q")
+                const formType = form.getAttribute("data-q-type")
+                questions[question] = []
+                if(formType === "Text") {
+
+                    const inputs = form.querySelectorAll(".form-answer")
+                    for(let input of inputs) {
+                        questions[question].push(input.value)
+                    }
+                } else {
+                    const inputs = form.querySelectorAll('.form-check-input');
+                    for (const input of inputs) {
+                        if (input.checked) {
+                            const answer = input.getAttribute("data-ans")
+                            questions[question].push(answer)
+                        }
+                    }
+                }
+            }
+            return questions
+        }
+
+    </script>
+    <script src="../assets/moneymaker/osus/js/lib/jquery-3.0.0.min.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/jquery-migrate-3.0.0.min.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/bootstrap.bundle.min.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/wow.min.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/jquery.fancybox.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/swiper.min.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/jquery.waypoints.min.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/jquery.counterup.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/back-to-top.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<!-- <script type="text/javascript" src="../assets/frappe/dist/js/frappe-web.bundle.3PQWM4VP.js"></script> -->
+    <script src="../assets/moneymaker/osus/js/main.js"></script>
+    <!-- <script src="../{{content.brand_name}}/course_survey.js"></script> -->
+
+</body>
+
+</html>

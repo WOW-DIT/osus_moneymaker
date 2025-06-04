@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg grad-color">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/{{content.brand_name}}">
+            <img src="{{content.icon_image}}" alt="" class="logo view-element" data-element-field="icon_image">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/{{content.brand_name}}">{{ _("Home") }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">{{ _("About") }}</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{ _("Courses") }}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/{{content.brand_name}}#courses">{{ _("All Courses") }}</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        {% for item in category %}
+                        <li><a class="dropdown-item" href="/{{content.brand_name}}/?category={{item.category}}#courses">{{_(item.category)}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{ _("Other") }}
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for item in content.pages %}
+                        <li><a class="dropdown-item" href="/{{content.brand_name}}/page?id={{item.page}}">{{ item.title}}</a></li>
+                        {% endfor %} 
+                    </ul>
+                </li>
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="/{{content.brand_name}}/contact">{{ _("Contact Us") }}</a>
+                </li>
+            </ul>
+            <div class="side-nav">
+                <form id="search-form" class="search-form d-flex" role="search" action="">
+                    <input id="search-input" class="form-control" type="search" placeholder="{{ _("Search") }}" aria-label="Search" {% if lang == "ar" %}style="padding-right: 22%;"{% endif %}>
+                    <button class="" type="submit"> <i class="fal fa-search"></i> </button>
+                </form>
+                {% if logged_in %}
+                <div class="ms-3">
+                    <a class="butn-sim" href="/{{content.brand_name}}/progress" role="button">
+                        <img src="../images/user.png" style="filter: invert(100%); width: 20px;" alt="user">
+                    </a>
+                </div>
+                {% else %}
+                <div class="dropdown ms-3">
+                    <a class="dropdown-toggle butn-sim" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ _("login") }}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/login">{{ _("login") }}</a></li>
+                        <li><a class="dropdown-item" href="/{{content.brand_name}}/regist">{{ _("register") }}</a></li>
+                    </ul>
+                </div>
+                {% endif %}
+                <button type="button" id="lang-btn" class="ms-5" style="border: none; background-color: transparent;"> <i class="fal fa-globe"></i> {% if lang == "en" %} AR {% else %} EN {% endif %} </button>
+            </div>
+        </div>
+    </div>
+</nav>
+<script src="../share/nav_edu.js"></script>

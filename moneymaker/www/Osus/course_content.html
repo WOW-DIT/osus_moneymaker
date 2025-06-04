@@ -1,0 +1,461 @@
+{% set asset_path = '../assets/moneymaker/training_platform/' %}
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> {{course.course.name}} </title>
+    <!--Page Icon-->
+    <link rel="shortcut icon" href="{{ content.icon_image }}" type="image/x-icon" title="Favicon" sizes="16x16" />
+
+    <!--Bootstrap with RTL-->
+    {% include 'www/training_shared/styles.html' %}
+</head>
+<body class="">
+
+    <!--Start navs-container -->
+    <div class="navs-container">
+        {% include 'www/training_shared/top_nav.html' %}
+
+        <!--Start main-nav-->
+        {% include 'www/training_shared/main_nav.html' %}
+    </div>
+
+    <main>
+
+        <!-- Start section -->
+        {% with title = 'محتوى الدورة' %}
+        {% include 'www/training_shared/page_header.html' %}
+        {% endwith %}
+
+        <!-- Start section -->
+        <section class="course_cont_pg section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 lg_box">
+                        <div class="meeting-window" style="display: none; position: relative; background-color: black;">
+                            <iframe
+                                id="online-frame"
+                                src=""
+                                allow="camera; microphone; fullscreen; display-capture"
+                                style="width: 100%; height: 500px; border: 0;"
+                            ></iframe>
+                        </div>
+                        <div dir="ltr" id="video-wrapper" class="vid_box video-card" {% if active_item.item.type != 'Video' %} style="display: none; position: relative;" {% endif %}>
+                            <video class="video" width="100%" autoplay {% if active_item.item.type == 'Video' %} src="https://osus.wowdigital.sa{{active_item.item.attachment}}" {% endif %}>
+                                {% if active_item.subtitles %}
+                                    {% for sub in active_item.subtitles %}
+                                    <track class="main-subtitle" src="${sub.file}" kind="subtitles" srclang="${sub.language}"></track>
+                                    {% endfor %}
+                                {% endif %}
+                            </video>
+                        
+                            <div id="custom-controls">
+                                <a  style="padding-left: 5px;"  onclick="playPause()">
+                                    <img id="play-img" style="width: 20px; height: 20px;" src="{{ asset_path }}images/play_icon.png" alt="">
+                                </a>
+                                <input type="range" id="seekBar" value="0" step="1" style="flex: 1; margin: 0 10px;" />
+                                <div id="volume" class="volume-container" style="position: relative;">
+                                    <a  id="muteBtn">🔊</a>
+                                    <input type="range" id="volumeSlider"
+                                            min="0" max="1" step="0.01" value="1"
+                                    />
+                                </div>
+                                <a id="subtitleBtn" onclick="toggleSubtitles()">💬</a>
+                                <a style="padding-right: 10px;" onclick="toggleFullscreen()">⛶</a>
+                            </div>
+                            <div id="next-item-dialog" style="display: none;">
+                                <h3 class="mb-5">الذهاب إلى</h2>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a id="dialog-next-item-btn" onclick="nextItem()">
+                                            <img src="../images/play_button.png" class="img1">
+                                            المحاضرة التالية
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a id="dialog-replay-btn" onclick="replayVideo()">
+                                            <img src="../images/replay_video.png" class="img1">
+                                            إعادة
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="article" width="100%" {% if active_item.item.type == 'Article' or active_item.item.type == 'Quiz' %} style="display: flex; flex-direction: column;" {% else %} style="display: none;" {% endif %}>
+                            <div class="article-body">
+                                {% if active_item.item.type == 'Article' %}
+                                {{active_item.item.article}}
+                                {% elif active_item.item.type == 'Quiz' %}
+                                <div class="quiz_box quiz-form">
+                                    <div class="survey_pg">
+                                        {% if active_item.item.state == 'Finished' %}
+                                        <h4 class="text-end">5 <small class="fs-6">/ 10</small></h4>
+                                        {% endif %}
+                                        <div class="form_box">
+                                            {% for qu in active_item.quiz %}
+                                            <div class="ques_box quiz-question" data-type="{{qu.question}}">
+                                                <h6 class="title fw-bold mb-4 readable"> {{qu.question}} </h6>
+                                                
+                                                {% for image in qu.images %}
+                                                <img class="mb-5" src="{{image.images}}" alt="" style="width: 100%;">
+                                                {% endfor %}
+
+                                                {% if qu.type != 'Matching' %}
+                                                {% for op in qu.options %}
+                                                <div class="form-check">
+                                                    <input
+                                                        data-index="{{loop.index0}}"
+                                                        type="{% if qu.type == 'Multichoice' %}checkbox{% else %}radio{% endif %}"
+                                                        class="form-check-input" id="{{qu.question}}-{{op.option}}" name="{{qu.question}}" value="{{op.option}}">
+                                                    <label class="form-check-label readable" for="{{qu.question}}-{{op.option}}">
+                                                        {{op.option}}
+                                                    </label>
+                                                </div>
+                                                {% endfor %}
+                                                {% else %}
+                                                <div class="d-flex">
+                                                    <div class="d-flex flex-column justify-content-center align-items-start gap-3" style="width: 50%">
+                                                        {% for mo in qu.matching_questions %}
+                                                        <div class="d-flex justify-content-start gap-2">
+                                                            <div>{{mo.matching_number}}-</div>
+                                                            <div>{{mo.option}}</div>
+                                                        </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <div class="d-flex flex-column justify-content-center align-items-center gap-3" style="width: 50%">
+                                                        {% for mo in qu.matching_answers %}
+                                                        <div class="d-flex justify-content-center gap-2">
+                                                            <input class="matching-input text-center w-25" name="{{qu.question}}" type="number"
+                                                            {% if active_item.item.state == "Finished" %}value="{{qu.matching_values[loop.index0]}}" disabled{% endif %}>
+                                                            <div>{{mo.option}}</div>
+                                                        </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                            {% endfor %}
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center gap-3" >
+                                <!-- {{active_item.item.type != 'Quiz' or active_item.item.state != 'Finished' or active_item.item.current_attempts == None or active_item.item.max_attempts == None or active_item.item.max_attempts >= active_item.item.current_attempts}} -->
+                                <button
+                                    type="button"
+                                    id="retake-quiz-btn"
+                                    class="butn primary_butn butn_w_arrow mt-5 w-100"
+                                    onclick="retakeQuiz()"
+                                    {% if active_item.item.type != 'Quiz' or active_item.item.state != 'Finished' or active_item.item.current_attempts == None or active_item.item.max_attempts == None or active_item.item.max_attempts >= active_item.item.current_attempts %}
+                                        style="display: none;"
+                                    {% endif %}
+                                >
+                                    إعادة الإختبار
+                                </button>
+
+                                <button type="button" id="complete-btn" class="butn primary_butn butn_w_arrow mt-5 w-100"
+                                    {% if active_item.item.type != 'Quiz' %} onclick="completeItem()" {% else %} onclick="submitQuiz()" {% endif %}
+                                    {% if active_item.item.state != 'Active' %} style="display: none;" {% endif %}
+                                >
+                                    <span class="readable">
+                                        {% if active_item.item.type == 'Quiz' %}
+                                        حفظ
+                                        {% else %}
+                                        إكمال
+                                        {% endif %}
+                                    </span>
+                                </button>
+
+                                <button type="button" id="next-btn" class="butn primary_butn butn_w_arrow mt-5 w-100"
+                                    onclick="nextItem()"
+                                    {% if active_item.item.state == "Active" or active_item.item.has_next == False %} style="display: none;" {% endif %}
+                                >
+                                    <span class="readable">
+                                        التالي
+                                    </span>
+                                </button>
+
+                            </div>
+                        </div>
+                        <div class="course_det_pg0 mt-5">
+                            <ul class="top_nav nav nav-pills mb-5" id="pills-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                  <button class="nav-link active" id="pills-tab1-tab" data-bs-toggle="pill" data-bs-target="#pills-tab1" type="button" role="tab" aria-controls="pills-tab1" aria-selected="true">
+                                        <div class="readable">
+                                            عن الدورة
+                                        </div>
+                                  </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                  <button class="nav-link" id="pills-tab2-tab" data-bs-toggle="pill" data-bs-target="#pills-tab2" type="button" role="tab" aria-controls="pills-tab2" aria-selected="false">
+                                    <div class="readable">
+                                        الاسئلة والاجوبة
+                                    </div>
+                                  </button>
+                                </li>
+    
+                            </ul>
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-tab1" role="tabpanel" aria-labelledby="pills-tab1-tab">
+                                    <div class="box">
+                                        <h2 class="title fs-3 fw-bold mb-5 readable" id="det-title"> {{_(active_item.item.title)}} </h2>
+                                        <div class="p" id="det-description">
+                                            {{_(active_item.item.description)}}
+                                        </div>
+                                        <!-- <ul class="check-list mt-5">
+                                            <li> 
+                                                <span class="icon"> <i class="fal fa-check"></i> </span> 
+                                                <span class="txt">   
+                                                    كتابة كود برنامجك الأول بثقة وإحترافية كبيرة من البداية وخطوة بخطوة مع إكتساب مهارات التفكير المنطقي. بعد ذلك، سوف تتعلم كيفية تطبيق الأكواد لتلبية المهام المختلفة.
+                                                </span>
+                                            </li>
+                                            <li> 
+                                                <span class="icon"> <i class="fal fa-check"></i> </span> 
+                                                <span class="txt">   
+                                                    إدراك كيفية إستخدام المتغيرات المختلفة والتعرف على أنواع البيانات وهياكل البيانات والتحكم في التدفق والتكرار والبرمجة الوظيفية لمساعدتك في الحصول على وظائف مستقبلية.
+                                                </span>
+                                            </li>
+                                            <li> 
+                                                <span class="icon"> <i class="fal fa-check"></i> </span> 
+                                                <span class="txt">   
+                                                    تعزيز مهارات حل المشكلات، وتحسين مهاراتك الشخصية، مع تعلم قابلية إعادة الإستخدام، والتوسع، والكفاءة؛ بالإضافة إلى تعلم بناء برنامج تجميع بيانات العملاء المحتملين.
+            
+                                                </span>
+                                            </li>
+                                        </ul> -->
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="pills-tab2" role="tabpanel" aria-labelledby="pills-tab2-tab">
+                                    <div class="box">
+                                        <h2 class="title fs-3 fw-bold mb-5 readable"> الاسئلة والاجوبة </h2>
+                                        <div class="">
+                                            <div class="accordion" id="accordionExample">
+                                                {% for qa in QAs %}
+                                                <div class="accordion-item" data-question-id="{{qa.name}}">
+                                                    <h2 class="accordion-header">
+                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
+                                                            <div class="prof_data user-info d-flex align-items-center mb-0">
+                                                                <img src="{{qa.image}}" class="avatar" alt=""/>
+                                                                <div class="txt">
+                                                                    <h6 class="name fw-bold mb-2 readable"> {{qa.full_name}} </h6>
+                                                                    <h2 class="title fw-bold fs-4"> {{qa.title}} </h2>
+                                                                </div>
+                                                            </div>
+                                                            <div class="num_reply color-primary">
+                                                                <i class="fa-light fa-messages me-1"></i> 5
+                                                            </div>
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapse{{loop.index}}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <p class="review_det">
+                                                                {{qa.question}}
+                                                            </p>
+
+                                                            <div class="answer-tabs">
+                                                                <a href="#0" onclick="getQName(this)" data-bs-toggle="modal" data-bs-target="#modalReply"> <i class="fal fa-message-arrow-up"></i> <span class="txt"> اضف ردك </span> </a>
+                                                                <a href="#0" onclick="getReplies(this)" data-bs-toggle="modal" data-bs-target="#modal-replies"> <i class="fal fa-eye"></i> <span class="txt"> شاهد الردود  </span> </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 left_box">
+                        <div class="vids_box">
+                            <h5 class="title border-bottom fs-6 fw-bold pb-4 mb-4 " > <i class="fa-light fa-bars" id="expandButn"></i> قائمة المحاضرات </h5>
+                            <div class="data_body">
+                                <div class="data lectures" data-active="{{active_item.item.name}}">
+                                    <button id="online-btn" class="butn primary_butn butn_w_arrow mb-5 w-100"
+                                        {% if online_link == None %} style="display: none;" {% endif %}
+                                        data-link="{{online_link.link}}"
+                                    >
+                                        <span class="txt">الفصل الإفتراضي</span>
+                                    </button>
+                                    {% for module in modules %}
+                                    {% set course_items = module.course_items %}
+                                    {% set is_active = course_items | selectattr('name', 'equalto', active_item.item.name) | list | length > 0 %}
+                                    <div class="module border mb-3 rounded">
+                                        <div class="module-header d-flex justify-content-between align-items-center p-3 cursor-pointer {% if not is_active %}collapsed{% endif %}"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#module-{{ loop.index }}"
+                                            aria-expanded="{% if is_active %}true{% else %}false{% endif %}"
+                                            aria-controls="module-{{ loop.index }}">
+
+                                            <h6 class="mb-0">{{ module.title }}</h6>
+                                            <i class="fa fa-chevron-down rotate-icon transition"></i>
+                                        </div>
+                                        <div id="module-{{ loop.index }}" class="collapse module-body px-3 pb-3 {% if is_active %}show{% endif %}">
+                                            {% for item in course_items %}
+                                            <button class="w-100 item d-flex align-items-center justify-content-between lecture-item {% if active_item.item.name == item.name %}active{% endif %}" data-id="{{item.name}}" data-det="{{item.description}}" data-title="{{item.title}}">
+                                                <div class="vid_link w-100">
+                                                    <div class="d-flex justify-content-start align-items-center gap-3">
+                                                        <div class="">
+                                                            <input disabled class="form-check-input" type="checkbox" value="" id="flexCheckDefault" {%if item.state == 'Finished' %}checked{% endif %}>
+                                                        </div>
+                                                        {% if item.type == 'Video' %}
+                                                        <div class="lecture_item">
+                                                            <i class="fa-light fa-circle-play"></i>
+                                                            <b class="lecture_item"> فيديو : </b>
+                                                            {{_(item.title)}}
+                                                        </div>
+                                                        
+                                                        {% elif item.type == 'Article' %}
+                                                        <div class="lecture_item">
+                                                            <i class="fa-light fa-newspaper"></i>
+                                                            <b> قراءة : </b>
+                                                            {{_(item.title)}}
+                                                        </div>
+            
+                                                        {% elif item.type == 'Quiz' %}
+                                                        <div class="lecture_item">
+                                                            <i class="fa-light fa-clipboard-check"></i>
+                                                            <b> تقييم : </b>
+                                                            {{_(item.title)}}
+                                                        </div>
+                                                        {% endif %}
+                                                    </div>
+                                                    <small class="dur lecture_item"> {{item.minutes}} د </small>
+                                                </div>
+                                                <!-- <a href="#" class="homework_link ">  <i class="fa-light fa-pen-circle"></i> الاختبار  </a> -->
+                                            </button>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    <a id="survey-btn" href="survey?id={{course.course.name}}" class="butn primary_butn butn_w_arrow mt-5 w-100" {% if user_completion != True or finishedSurvey == True %} style="display: none;" {% endif %}>
+                                        <span class="txt">استبيان نهاية الدورة</span>
+                                    </a>
+                                    <a id="certificate-btn" href="{{certificate_link}}&language={{lang}}" target="_blank" class="butn primary_butn butn_w_arrow mt-5 w-100" {% if user_completion != True or finishedSurvey == False %} style="display: none;" {% endif %}>
+                                        <span class="txt">عرض الشهادة</span>
+                                        <div style="width: 15px;"></div>
+                                        <span class="butn-icon">
+                                            <span class="butn-icon-inner"><i class="fal fa-file-certificate"></i></span>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="drawerButn"> <i class="fa-light fa-arrow-right-long"></i> محتوى الدورة </button>
+        </section>
+
+
+
+
+    </main>
+
+    <!-- Modal -->
+    <div class="modal modalReply fade" id="modalReply" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <div class="modal-body">
+                    <h5 class="fw-bold mb-4"> أضف الرد </h5>
+
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="العنوان">
+                            <textarea id="reply-field" name="reply-field" class="form-control" placeholder="اكتب هنا ... " rows="7" ></textarea>
+                        </div>
+                        <div class="col-lg-3 mt-4  mx-auto">
+                            <button type="button" class="butn primary_butn butn_w_arrow w-100" id="reply-btn" onclick="writeReply(this)">
+                                <span> ارسال </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal repliesModal modal-replies fade" id="modal-replies" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <div class="modal-body">
+                    <h5 class="fw-bold text-center mb-4"> الردود السابقة </h5>
+
+                    <div class="msgs_box all-replies">
+                        <!-- <div class="data msg_data_box">
+                            <p class="date mb-2">
+                                <i class="fa-light fa-calendar-days"></i> 15 ديسمبر 2024 - 11:30AM
+                            </p>    
+                            من ركائز التنمية الاقتصادية (صنع في السعودية) وذلك عبر التنقل بهم من مرحلة التدريب و الاعتماد ثم الاحتضان للتجارة الالكترونية و ربطهم بالمسرعات التي سوف تنقلهم من مرحلة التاجر متناهي الصغر الى مرحلة التاجر الصغير و استمرار النمو بهم حتى الاستثمار و النمو المستمر وهذا هو هدفنا الاساسي لمواكبة رؤية مملكتنا 2030 في دعم الاقتصاد التنموي ابتكار مشاريع تنموية واستثمارية في الكوادر البشرية السعودية و تنميتها عن طريق التحول الرقمي و ذكاء الاعمال تحت عنوان (اسس لبناء الانسان للزمان و المكان) وتفعيل مصطلح الاقتصاد التشاركي سوق التجارة الالكترونية و الاستفادة
+                        </div>
+                        <div class="data msg_data_box">
+                            <p class="date mb-2">
+                                <i class="fa-light fa-calendar-days"></i> 15 ديسمبر 2024 - 11:30AM
+                            </p>    
+                            التشاركي بتمكين الكوادر البشرية وتأهيلهم لدخول سوق التجارة الالكترونية و الاستفادة من ركائز واستثمارية في الكوادر (اسس لبناء الانسان للزمان و المكان) وتفعيل مصطلح الاقتصاد
+                            من ركائز التنمية الاقتصادية (صنع في السعودية) وذلك عبر التنقل بهم من مرحلة التدريب و الاعتماد ثم الاحتضان للتجارة الالكترونية و ربطهم بالمسرعات التي سوف تنقلهم من مرحلة التاجر متناهي الصغر الى مرحلة التاجر الصغير و استمرار النمو بهم حتى الاستثمار و النمو المستمر وهذا هو هدفنا الاساسي لمواكبة رؤية مملكتنا 2030 في دعم الاقتصاد التنموي ابتكار مشاريع تنموية واستثمارية في الكوادر البشرية السعودية و تنميتها عن طريق التحول الرقمي و ذكاء الاعمال تحت عنوان (اسس لبناء الانسان للزمان و المكان) وتفعيل مصطلح الاقتصاد التشاركي سوق التجارة الالكترونية و الاستفادة
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start footer -->
+    {% include 'www/training_shared/footer.html' %}
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    {% include 'www/training_shared/reader.html' %}
+
+    <!-- loading -->
+    {% with logo = content.white_logo %}
+    {% include 'www/training_shared/loader.html' %}
+    {% endwith %}
+
+    <!--Js Files & Libraries-->
+    {% include 'www/training_shared/scripts.html' %}
+    <script src="../{{content.brand_name}}/content.js"></script>
+    {% if active_item.item.type == 'Quiz' %}
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+          {% if active_item.item.type == 'Quiz' %}
+            const has_next = "{{active_item.item.has_next}}"=="False"? false:true
+            const courseItem = {
+              type: "{{ active_item.item.type }}",
+              state: "{{ active_item.item.state }}",
+              quiz: "{{ active_item.item.quiz }}",
+              quiz_mark: "{{ active_item.item.quiz_mark}}",
+              passed: "{{ active_item.item.passed }}",
+              has_next: has_next,
+              current_attempts: "{{active_item.item.current_attempts}}",
+              max_attempts: "{{active_item.item.max_attempts}}",
+            };
+      
+            const subtitles = null;  // Or use actual data if relevant
+      
+            await setMainContent(courseItem, subtitles);
+          {% endif %}
+        });
+    </script>
+    {% endif %}
+</body>
+</html>

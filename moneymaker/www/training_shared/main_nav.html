@@ -1,0 +1,56 @@
+{% set asset_path = '../assets/moneymaker/training_platform/' %}
+{% if url_prefix == None %}
+{% set url_prefix = '' %}
+{% endif %}
+<nav class="navbar navbar-expand-lg ">
+    <div class="container">
+        <a class="navbar-brand" href="/Osus">
+            <img src="{{ content.icon_image }}" class="logo dark_d_none view-element" data-element-field="icon_image" data alt="" />
+            <img src="{{ content.white_logo }}" class="logo dark_d_block d-none view-element" data-element-field="white_logo" alt="" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/{{ url_prefix }}">الرئيسية</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_prefix }}about">من نحن</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_prefix }}courses">الدورات</a>
+                </li>
+                <li class="nav-item has_dropdown">
+                    <a class="nav-link" href="#">اخرى</a>
+                    <div class="dropdown_box">
+                        {% for item in content.pages %}
+                        <a href="/{{content.brand_name}}/page?id={{item.page}}"> {{item.title}} </a>
+                        {% endfor %}
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_prefix }}contact">اتصل بنا</a>
+                </li>
+            </ul>
+            <div class="nav_end d-flex">
+      
+                <a href="#" class="butn sm_butn gray_butn">
+                    <i class="fa-light fa-magnifying-glass"></i>
+                </a>
+                <a href="{{ url_prefix }}notifications" class="butn sm_butn gray_butn">
+                    <i class="fa-light fa-bell"></i>
+                    <span class="num">3</span>
+                </a>
+                <div class="themeToggler">
+                    <label id="switch" class="switch">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox"  onchange="toggleTheme()"  id="slider" checked>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

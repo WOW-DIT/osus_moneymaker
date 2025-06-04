@@ -1,0 +1,293 @@
+{% set asset_path = '../assets/moneymaker/training_platform/' %}
+{% set riyal_symbol = '/files/riyal_symbol.svg' %}
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> Profile </title>
+    <!--Page Icon-->
+    <link rel="shortcut icon" href="{{ content.icon_image }}" type="image/x-icon" title="Favicon" sizes="16x16" />
+
+    {% include 'www/training_shared/styles.html' %}
+
+</head>
+<body class="" data-brand="{{content.brand_name}}">
+
+    <!--Start navs-container -->
+    <div class="navs-container">
+        {% include 'www/training_shared/top_nav.html' %}
+
+        <!--Start main-nav-->
+        {% include 'www/training_shared/main_nav.html' %}
+    </div>
+
+    <main>
+        <!-- Start section -->
+        {% with title = 'الملف الشخصي' %}
+        {% include 'www/training_shared/page_header.html' %}
+        {% endwith %}
+
+
+        <!-- Start section -->
+        <section class="profile_pg section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="prof-side">
+                            <div class="prof-data wrapper">
+                                <div class="img-box">
+                                    {% if profile.user_image %}
+                                    <img src="{{ profile.user_image }}" alt="" class="secImg">
+                                    {% else %}
+                                    <img src="{{ asset_path }}images/avatar-4.png" alt="" class="secImg">
+                                    {% endif %}
+                                </div>
+                                <h5 class="name text-center mt-4 mb-0"><b> {{profile.full_name}} </b></h5>
+
+                                <div class="form-check form-switch text-center justify-content-center d-flex mt-4">
+                                    <input class="form-check-input me-3" type="checkbox" role="switch" id="notiSwitch" {% if profile.thread_notify == 1 %}checked{% endif %}>
+                                    <label class="form-check-label" for="notiSwitch">تفعيل استقبال الاشعارات </label>
+                                </div>
+
+                            </div>
+                    
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="box">
+                            <ul class="top_nav justify-content-center nav nav-pills mb-0" id="pills-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                  <button class="nav-link active" id="pills-tab1-tab" data-bs-toggle="pill" data-bs-target="#pills-tab1" type="button" role="tab" aria-controls="pills-tab1" aria-selected="true">
+                                        بيانات الملف الشخصي 
+                                  </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                  <button class="nav-link" id="pills-tab2-tab" data-bs-toggle="pill" data-bs-target="#pills-tab2" type="button" role="tab" aria-controls="pills-tab2" aria-selected="false">
+                                        الدورات 
+                                  </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#logoutModal">تسجيل الخروج</button>
+                                </li>
+    
+                            </ul>
+
+                            <div class="inner mt-5">
+                                <div class="tab-content" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="pills-tab1" role="tabpanel" aria-labelledby="pills-tab1-tab">
+                                        <div class="prof_tab">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="data-group">
+                                                        <p class="data mb-0"><span class="icon"> <i class="fa-light fa-user"></i> </span> {{profile.full_name}} </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="data-group">
+                                                        <p class="data mb-0"><span class="icon"> <i class="fa-light fa-mobile"></i> </span> <span class="dir_ltr">{{profile.mobile_no}}</span>  </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="data-group">
+                                                        <p class="data mb-0"><span class="icon"> <i class="fa-light fa-envelope"></i> </span> {{profile.email}} </p>
+                                                    </div>
+                                                </div>
+    
+                                                
+                                            </div>
+
+                                            
+                                            <a href="edit_profile.html" class="butn primary_border_butn butn_w_arrow mx-auto mt-5">
+                                                <span> تعديل البيانات   </span>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-tab2" role="tabpanel" aria-labelledby="pills-tab2-tab">
+                                        <div class="courses_tab">
+                                            <ul class="nav justify-content-center nav-pills mb-3" id="pills-tab2" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link active" id="pills-completed-tab" data-bs-toggle="pill" data-bs-target="#pills-completed" type="button" role="tab" aria-controls="pills-completed" aria-selected="true"> الدورات المكتملة </button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="pills-currently-tab" data-bs-toggle="pill" data-bs-target="#pills-currently" type="button" role="tab" aria-controls="pills-currently" aria-selected="false">الدورات الحالية </button>
+                                                </li>
+                                        
+                                            </ul>
+
+                                            <div class="tab-content" id="pills-tabContent2">
+                                                <div class="tab-pane fade show active" id="pills-completed" role="tabpanel" aria-labelledby="pills-completed-tab">
+                                                    {% for c in courses.completed %}
+                                                    <div class="courses_sec">
+                                                        <div class="course_card">
+                                                            <div class="row">
+                                                                <div class="col-lg-4">
+                                                                    <div class="img_box">
+                                                                        <img src="{{ c.hero_image }}" class="secImg" alt="" />
+                                                                        <img src="{{ c.hero_image }}" class="secImg" alt="" />
+                                                                        <div class="overlay"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-8">
+                                                                    <div class="card-body">
+                                                                        <p class="categ">{{ c.category }}</p>
+                                                                        <a href="course_content?id={{c.name}}">
+                                                                            <h4 class="title">{{ c.course_name_ar }}</h4>
+                                                                        </a>
+                                                                        
+                                                                        <div class="d-flex justify-content-between flex-wrap mt-4">
+                                                                            <div class="p">
+                                                                                تاريخ التسجيل : <b> {{ c.date }} </b>
+                                                                            </div>
+                                                                            <div class="p">
+                                                                                نسبة إكمال الدورة : <b> {{ c.completion_percentage }}% </b>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                        <div class="price_row">
+                                                                            <div>
+                                                                                {% if c.cert_url != None %}
+                                                                                <div class="p">
+                                                                                    الشهادة   : <a target="_blank" href="{{c.cert_url}}" class="color-primary underline">  <strong>عرض</strong> </a>
+                                                                                </div>
+                                                                                {% else %}
+                                                                                <div class="p">
+                                                                                    الشهادة   : <a target="_blank" href="survey?id={{c.name}}" class="color-primary underline"> <strong>عرض</strong> </a>
+                                                                                </div>
+                                                                                {% endif %}
+                                                                            </div>
+                                                                            <div class="stars">
+                                                                                <span class="star"> <i class="fas fa-star me-1"></i> </span>
+                                                                                <span> 5 </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        {#
+                                                                        <div class="price_row">
+                                                                            <div class="price">
+                                                                                {% if c.discount > 0 %}
+                                                                                <span> {{c.price}} <small> <img src="{{riyal_symbol}}" alt="" class="riyal_symbol"> </small> </span>
+                                                                                {% endif %}
+                                                                                <span class="old_prc"> {{c.priceold}} <small> <img src="{{riyal_symbol}}" alt="" class="riyal_symbol"> </small> </span>
+                                                                            </div> 
+                                                                            <div class="stars">
+                                                                                <span class="star"> <i class="fas fa-star me-1"></i> </span>
+                                                                                <span> 5 </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        #}
+                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="tab-pane fade" id="pills-currently" role="tabpanel" aria-labelledby="pills-currently-tab">
+                                                    {% for c in courses.in_progress %}
+                                                    <div class="courses_sec">
+                                                        <div class="course_card">
+                                                            <div class="row">
+                                                                <div class="col-lg-4">
+                                                                    <div class="img_box">
+                                                                        <img src="{{ c.hero_image }}" class="secImg" alt="" />
+                                                                        <img src="{{ c.hero_image }}" class="secImg" alt="" />
+                                                                        <div class="overlay"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-8">
+                                                                    <div class="card-body">
+                                                                        <p class="categ">{{ c.category }}</p>
+                                                                        <a href="course_content?id={{c.name}}">
+                                                                            <h4 class="title">{{ c.course_name_ar }}</h4>
+                                                                        </a>
+                                                                        
+                                                                        <div class="d-flex justify-content-between flex-wrap mt-4">
+                                                                            <div class="p">
+                                                                                تاريخ التسجيل : <b> {{ c.date }} </b>
+                                                                            </div>
+                                                                            <div class="p">
+                                                                                نسبة إكمال الدورة : <b> {{ c.completion_percentage }}% </b>
+                                                                            </div>
+                                                                        </div>
+                                        
+                                                                        <!-- <div class="price_row">
+                                                                            <div class="price">
+                                                                                <span>
+                                                                                    25.0
+                                                                                    <small>
+                                                                                    <img src="{{ riyal_symbol }}" alt="">
+                                                                                    </small>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div class="stars">
+                                                                                <span class="star"> <i class="fas fa-star me-1"></i> </span>
+                                                                                <span> 5 </span>
+                                                                            </div>
+                                                                        </div> -->
+                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal logoutModal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <div class="modal-body">
+                    <img src="{{ asset_path }}images/icons/logout.png" alt="" class="img"/>
+                    <h3 class="title color-secondary  text-center"><b> تسجيل خروج </b></h3>
+                    <p class="det text-center my-4">
+                        هل انت متأكد من تسجيل الخروج؟
+                    </p>
+                    <div class="d-flex justify-content-center mt-4 pt-2">
+                        <button type="button" class="butn btn-secondary mx-1" data-bs-dismiss="modal">لا</button>
+                        <button type="button" id="logout-btn" class="butn primary_butn mx-1">نعم</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start footer -->
+    {% include 'www/training_shared/footer.html' %}
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    <!-- loading -->
+    {% with logo = content.white_logo %}
+    {% include 'www/training_shared/loader.html' %}
+    {% endwith %}
+
+    <!--Js Files & Libraries-->
+    {% include 'www/training_shared/scripts.html' %}
+    <script src="../{{content.brand_name}}/profile.js"></script>
+
+</body>
+</html>

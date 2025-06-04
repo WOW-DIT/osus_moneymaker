@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> أسس | الرئيسية </title>
+    <!--Page Icon-->
+    <link rel="shortcut icon" href="../assets/moneymaker/New/images/icon.png" type="image/x-icon" title="Favicon" sizes="16x16" />
+
+    <!--Bootstrap with RTL-->
+    <link rel="stylesheet" href="../assets/moneymaker/New/css/lib/bootstrap.rtl.css">
+    <!--Bootstrap with LTR-->
+    <!-- <link rel="stylesheet" href="css/lib/bootstrap.min.css"> -->
+
+    <!-- Fontawosome 6 pro icons  -->
+    <link rel="stylesheet" href="../assets/moneymaker/New/css/lib/all.min.css">
+    <!-- Libraries  -->
+    <link rel="stylesheet" href="../assets/moneymaker/New/css//lib/animate.css">
+    <link rel="stylesheet" href="../assets/moneymaker/New/css/lib/jquery.fancybox.css">
+    <link rel="stylesheet" href="../assets/moneymaker/New/css/lib/swiper.min.css">
+    <link rel="stylesheet" href="../assets/moneymaker/New/css/style.css">
+    <link rel="stylesheet" href="../assets/moneymaker/New/css/q.css">
+</head>
+<body>
+
+    <!--Start navs-container -->
+    {% include "templates/includes/osus/header.html" %}
+
+    <main>
+
+        <!-- Start section -->
+        <section class="cart-section wow fadeIn" style="visibility: visible; animation-name: fadeIn;margin-top:112px;">
+            <div class="container" id="container">
+                <div id="cart-empty" class="cart-empty text-center" style="display: {% if cart.items | length < 1 %}inline{% else %}none{% endif %};">
+                    <div class="cart-title wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">سلة المشتريات</div>
+                    <div class="cart-empty-wrap cart-content background wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+                        <svg xmlns="//www.w3.org/2000/svg" width="58.005" height="53.164" viewBox="0 0 58.005 53.164">
+                            <path id="shopping-cart" d="M55.622,31.018H10.269l-.674-7.51a2.382,2.382,0,0,0-2.373-2.169H2.382a2.382,2.382,0,1,0,0,4.764H5.044C6.5,42.31,2.739.419,7.784,56.627a9.165,9.165,0,0,0,3.431,6.209,7.22,7.22,0,1,0,12.478,1.986H36.731a7.222,7.222,0,1,0,6.791-4.764h-26.6a4.424,4.424,0,0,1-4.067-2.682l38.07-2.237a2.382,2.382,0,0,0,2.171-1.8l4.84-19.36A2.383,2.383,0,0,0,55.622,31.018ZM16.9,69.738A2.458,2.458,0,1,1,19.36,67.28,2.461,2.461,0,0,1,16.9,69.738Zm26.62,0A2.458,2.458,0,1,1,45.98,67.28,2.461,2.461,0,0,1,43.522,69.738Zm5.373-19.253L12.21,52.64,10.7,35.782H52.571Z" transform="translate(0 -21.338)" fill="#8a8e98"></path>
+                        </svg>
+                        <p>لم تقم بإضافة عناصر الي السلة</p>
+                        <a href="/packages" class="payment-button cart-empty-btn"> أضف خدمة </a>
+                    </div>
+                </div>
+
+                <form id="cart-form" action="/user/cart" method="post" siq_id="autopick_2pwefgc8qj" style="display: {% if cart.items | length > 0 %}inline{% else %}none{% endif %};">
+                    <div class="row">
+                        <div class="col-md-7 col-lg-8">
+                            <input type="hidden" name="_token" value="hukulmr0EPOtNRO0yoSDOJgooaTAgWxcaJKcH7xh">
+                            <div class="cart-title wow bounceInUp faster" style="visibility: visible; animation-name: bounceInUp;">
+                                سلة المشتريات
+                            </div>
+                            <div id="cart-container" class="cart-content cart-items background wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+                                <div class="cart-count-text wow bounceInUp faster" style="visibility: visible; animation-name: bounceInUp;"><b>{{cart.items | length}}</b> عناصر
+                                    في السلة
+                                </div>
+                                {% for item in cart.items %}
+                                <div class="cart-item wow bounceInUp faster" style="visibility: visible; animation-name: bounceInUp;">
+                                    <div class="cart-item-img">
+                                        <a href="">
+                                            <img src="{{item.image}}">
+                                        </a>
+                                    </div>
+                                    <div class="cart-item-details">
+                                        <a href="">
+                                            <h3>
+                                                {{item.item_name}}
+                                                <div class="price">
+                                                    <span>{{item.price}} ر.س  (x{{item.qty}})</span>
+                                                </div>
+                                            </h3>
+                                        </a>
+                                    </div>
+                                    <button type="button" class="remove-cart delete" data-item="{{item.item}}" data-text="هل أنت متأكد من انك تريد إزالة باقة عصارة بلس من سلة المشتريات ؟">
+                                        <svg id="Combined_Shape" data-name="Combined Shape" xmlns="//www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
+                                            <path id="Combined_Shape-2" data-name="Combined Shape" d="M8.781,9.791,5,6.01,1.219,9.791A.714.714,0,0,1,.209,8.781L3.99,5,.209,1.219A.715.715,0,0,1,1.219.209L5,3.99,8.781.209a.714.714,0,0,1,1.01,1.011L6.01,5,9.791,8.781a.714.714,0,1,1-1.01,1.01Z"></path>
+                                        </svg>
+                                    </button>
+                                    <!-- <a href="#" class="butn primary_butn sm_butn"> 
+                                        <span> EN </span> 
+                                    </a> -->
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-lg-4">
+                            <div class="cart-title wow bounceInUp faster" style="visibility: visible; animation-name: bounceInUp;">إجمالي السلة</div>
+                            <div class="cart-total-wrap background wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+                                <div class="cart-subtotal-item wow bounceInUp faster" style="visibility: visible; animation-name: bounceInUp;">
+                                    <span class="text">المجموع</span>
+                                    <span class="value" id="amount">{{cart.total_amount}} ر.س</span>
+                                </div>
+                                
+                                <div class="cart-subtotal-item wow bounceInUp faster" style="visibility: visible; animation-name: bounceInUp;">
+                                    <span class="text">ضريبة 15% <i>(/////)</i></span>
+                                    <span class="value" id="vat">+{{cart.vat}} ر.س</span>
+                                </div>
+                                <div class="cart-subtotal-item total wow bounceInUp faster" style="visibility: visible; animation-name: bounceInUp;">
+                                    <span class="text">الاجمالي</span>
+                                    <span class="value" id="grand-total">{{cart.grand_total}} ر.س</span>
+                                </div>
+                                <button type="button" id="payment-button" class="payment-button go-checout wow bounceInUp faster button_su_inner" style="visibility: visible; animation-name: bounceInUp;">
+                                    <span>التقدم لاتمام الطلب</span>
+                                    <svg id="Combined_Shape" data-name="Combined Shape" xmlns="//www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 14 12">
+                                        <path id="Combined_Shape-2" data-name="Combined Shape" d="M7.293,11.707a1,1,0,0,1,0-1.414L11.586,6,7.293,1.707A1,1,0,0,1,8.708.293l5,5a1,1,0,0,1,0,1.414l-5,5a1,1,0,0,1-1.415,0Zm-7,0a1,1,0,0,1,0-1.414L4.586,6,.293,1.707A1,1,0,0,1,1.707.293l5,5a1,1,0,0,1,0,1.414l-5,5a1,1,0,0,1-1.415,0Z" transform="translate(0 0)" fill="#fff"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="cart-discount wow bounceInUp faster" style="visibility: visible; animation-name: bounceInUp;">
+                                <div class="input-wrap">
+                                    <svg xmlns="//www.w3.org/2000/svg" width="16" height="15.995" viewBox="0 0 16 15.995">
+                                        <path id="Shape-2" d="M28.5,1159.511l6.269,6.269a.757.757,0,0,1,0,1.063l-5.421,5.42a.756.756,0,0,1-1.056.012l-1.036-1.1-.036.035L22.011,1166v-6.488H28.5m.313-1.511H21.256a.756.756,0,0,0-.756.756v7.557a.754.754,0,0,0,.221.534l6.492,6.485h0a2.268,2.268,0,0,0,3.206,0l5.42-5.42a2.267,2.267,0,0,0,0-3.2l-6.494-6.493a.754.754,0,0,0-.534-.221Z" transform="translate(-20.5 -1158)" fill="#8a8e98"></path>
+                                    </svg>
+                                    <input id="promocode" type="text" placeholder="كود تخفيض">
+                                </div>
+                                <button id="check_promocode" type="button">تطبيق</button>
+                                <span id="promocode_msg" class="pt-2" style="display: none;font-size: 13px;"></span>
+                            </div>
+                            <div class="form-group hint-input-wrap" style="background-color: #dbf2f8;;margin-top: 10px;">
+                                <svg id="Combined_Shape" data-name="Combined Shape" xmlns="//www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                                    <path id="Combined_Shape-2" data-name="Combined Shape" d="M3.222,18.778A11,11,0,1,1,18.778,3.222,11,11,0,1,1,3.222,18.778ZM2,11a9,9,0,1,0,9-9A9.01,9.01,0,0,0,2,11Zm8,4V11a1,1,0,1,1,2,0v4a1,1,0,0,1-2,0Zm.293-6.293A1,1,0,1,1,11,9,1,1,0,0,1,10.293,8.708Z" transform="translate(0 0)" fill="#5fcfdd"></path>
+                                </svg>
+                                <span>كود الخصم لا يعمل اذا كان هناك خصم مسبق</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Start footer -->
+    {% include "templates/includes/osus/footer.html" %}
+    
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    <!-- loading -->
+    <!-- <div id="preloader">
+        <div id="loading-wrapper" class="show">
+            <div id="loading-text"> <img src="icon.png" alt=""> </div>
+            <div id="loading-content"></div>
+        </div>
+    </div> -->
+
+    <!--Js Files & Libraries-->
+    <script src="../assets/moneymaker/New/js/lib/jquery4.js"></script>
+    <script src="../assets/moneymaker/New/js/lib/popper.js"></script>
+    <script src="../assets/moneymaker/New/js/lib/bootstrap.bundle.min.js"></script>
+    <script src="../assets/moneymaker/New/js/lib/jquery.fancybox.js"></script>
+    <script src="../assets/moneymaker/New/js/lib/swiper.js"></script>
+    <script src="../assets/moneymaker/New/js/lib/wow.min.js"></script>
+    <script src="../assets/moneymaker/New/js/lib/back-to-top.js"></script>
+    <script src="../assets/moneymaker/New/js/lib/scollit.min.js"></script>
+    <script src="../assets/moneymaker/New/js/main.js"></script>
+    <script src="cart.js"></script>
+    <!-- <script type="module" src="../assets/frappe/js/frappe-web.bundle.js"></script>
+    <script type="module" src="../assets/frappe/js/desk.bundle.js"></script>
+    <script>
+        console.log(frappe.session)
+    </script> -->
+    <!-- <script src="../assets/frappe/js/frappe.min.js"></script>
+    <script type="module" src="../assets/moneymaker/js/desk.bundle.js"></script>
+    <script type="module" src="../assets/moneymaker/js/controls.bundle.js"></script>
+    <script type="module" src="../assets/moneymaker/js/form.bundle.js"></script>
+    <script type="module" src="../assets/moneymaker/js/frappe-web.bundle.js"></script>
+    <script type="module" src="../assets/moneymaker/js/libs.bundle.js"></script>
+    <script type="module" src="../assets/moneymaker/js/list.bundle.js"></script>
+    <script type="module" src="../assets/moneymaker/js/web_form.bundle.js"></script> -->
+
+</body>
+</html>

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+            shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Hossam Mohamed" />
+    <link rel="shortcut icon" href="{{content.icon_image}}" title="Favicon" sizes="16x16" />
+
+    <!--With LTR -->
+    <link rel="stylesheet" href="../assets/moneymaker/osus/css/lib/bootstrap.min.css">
+    <!--  -->
+
+    <!--With RTL -->
+    <!-- <link rel="stylesheet" href="css/lib/bootstrap.rtl.min.css" /> -->
+    <!--  -->
+
+    <!-- google roboto font -->
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!--  -->
+
+    <link rel="stylesheet" href="../assets/moneymaker/osus/css/lib/animate.css" />
+    <link rel="stylesheet" href="../assets/moneymaker/osus/css/lib/jquery.fancybox.css" />
+    <link rel="stylesheet" href="../assets/moneymaker/osus/css/lib/swiper.min.css" />
+    <link rel="stylesheet" href="../assets/moneymaker/osus/css/lib/all.min.css" />
+    <link rel="stylesheet" href="../assets/moneymaker/osus/css/style.css" />
+    <style>
+        :root {
+            --mainColor: {{content.main_color}} !important;
+            --subColor: {{content.second_color}} !important;
+        }
+        .grad-color {
+            background-image: linear-gradient(104.23deg, {{content.gradient_color_1}} 1.55%, {{content.gradient_color_2}} 99.04%) !important;
+        }
+        footer {
+            background-color: {{content.header_color}} !important;
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="css/style_en.css"> -->
+    <title> Osus </title>
+</head>
+
+<body class="" data-inst="{{content.institution}}" data-brand="{{content.brand_name}}">
+
+
+    <!--Start navbar-->
+    <nav class="navbar navbar-expand-lg grad-color">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/{{content.brand_name}}">
+                <img src="{{content.icon_image}}" alt="" class="logo view-element" data-element-field="icon_image">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/{{content.brand_name}}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">about</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            courses
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/{{content.brand_name}}#courses">all courses</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            {% for item in category %}
+                            <li><a class="dropdown-item" href="/{{content.brand_name}}/?category={{item.category}}#courses">{{item.category}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">contact us</a>
+                    </li>
+                </ul>
+                <div class="side-nav">
+                    <form class="search-form d-flex" role="search">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        <button class="" type="submit"> <i class="fal fa-search"></i> </button>
+                    </form>
+                    {% if logged_in %}
+                    <div class="ms-3">
+                        <a class="butn-sim" href="https://osus.wowdigital.sa/app/user/{{user}}" role="button">
+                            <img src="../images/user.png" style="filter: invert(100%); width: 20px;" alt="user">
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="dropdown ms-3">
+                        <a class="dropdown-toggle butn-sim" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            login
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/login">login</a></li>
+                            <li><a class="dropdown-item" href="/student-applicant">register</a></li>
+                        </ul>
+                    </div>
+                    {% endif %}
+                    <a href="#" class="ms-5"> <i class="fal fa-globe"></i> AR </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--End-navbar-->
+
+
+    <!--Content-->
+
+    <!--  start header  -->
+    <header class="grad-color">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="info pe-lg-5">
+                        <h1 class="view-element" data-element-field="start_title_big"> {{content.start_title_big}} <a href="#"> <img src="{{content.with_logo}}" alt="" class="logo object-fit-contain view-element" data-element-field="with_logo"> </a> </h1>
+                        <div class="text view-element" data-element-field="start_text"> {{content.start_text}} </div>
+                        {% if content.start_button_show -%}
+                        <a href="{{content.start_url_button}}" class="butn">
+                            <span class="txt view-element" data-element-field="start_text_button">{{content.start_text_button}}</span>
+                            <span class="butn-icon">
+                                <span class="butn-icon-inner"><i class="fal fa-arrow-right"></i></span>
+                            </span>
+                        </a>
+                        {%- endif %}
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="imgs">
+                        <div class="row justify-content-around align-items-center gx-5">
+                            <div class="col-8">
+                                <div class="main-img">
+                                    <div class="img">
+                                        <img src="{{content.start_big_image}}" alt="" class="img-cover view-element" data-element-field="start_big_image">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="sm-imgs">
+                                    <div class="img">
+                                        <img src="{{content.start_1ft_small_image}}" alt="" class="img-cover view-element" data-element-field="start_1ft_small_image">
+                                    </div>
+                                    <div class="img">
+                                        <img src="{{content.start_2st_small_image}}" alt="" class="img-cover view-element" data-element-field="start_2st_small_image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="total-student">
+                            <div class="total-student__inner">
+                                <div class="total-student__image">
+                                    <img src="../assets/moneymaker/osus/images/user1.png" alt="student" class="slider-image">
+                                    <img src="../assets/moneymaker/osus/images/user2.png" alt="student" class="slider-image">
+                                </div>
+                                <h4 class="total-student__text count-box">
+                                    <span class="counter">{{number_of_students}}+</span> <br> <span>Students</span>
+                                </h4>
+                            </div>
+                        </div>
+                        <img src="{{content.big_background_image}}" alt="" class="shap2 view-element" data-element-field="big_background_image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img src="{{content.big_background_image}}" alt="" class="shap1 view-element" data-element-field="big_background_image">
+    </header>
+    <!--  end header  -->
+
+    <main>
+
+
+        <!-- ---------- pricing ----------- -->
+        <!-- <section class="pricing">
+            <div class="container">
+                <div class="section-title">
+                    <img src="../assets/moneymaker/osus/images/fav.png" alt="" class="icon">
+    
+                    <h2> our plans </h2>
+                </div>
+                <div class="cards">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="item">
+                                <div class="price-wrapper">
+                                    <h3> 99.99 <small> SAR </small> </h3>
+                                    <h5> plan 1 </h5>
+                                </div>
+                                <div class="main-text sub-font"> We are trusted by 1,500 students and we have the best teachers in the Arab world  </div>
+                                <ul class="check-list">
+                                    <li> <span class="icon"> <i class="fal fa-check"></i> </span> <span class="txt"> access to one course </span> </li>
+                                    <li> <span class="icon"> <i class="fal fa-check"></i> </span> <span class="txt"> only one device </span> </li>
+                                    <li> <span class="icon"> <i class="fal fa-check"></i> </span> <span class="txt"> watch 5 videos by day </span> </li>
+                                    <li class="dlt"> <span class="icon"> <i class="fal fa-check"></i> </span> <span class="txt"> access to one course </span> </li>
+                                    <li class="dlt"> <span class="icon"> <i class="fal fa-check"></i> </span> <span class="txt"> only one device </span> </li>
+                                </ul>
+                                <a href="#" class="butn butn-light mt-2 w-100">
+                                    <span class="txt">Join now</span>
+                                    <span class="butn-icon">
+                                        <span class="butn-icon-inner"><i class="fal fa-arrow-right"></i></span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="item recommended">
+                                <div class="price-wrapper">
+                                    <h3> 199.99 <small> SAR </small> </h3>
+                                    <h5> plan 2 </h5>
+                                </div>
+                                <div class="main-text sub-font"> We are trusted by 1,500 students and we have the best teachers in the Arab world  </div>
+                                <ul class="check-list">
+                                    <li> <span class="icon"> <i class="fal fa-check"></i> </span> <span class="txt"> access to one course </span> </li>
+                                    <li> <span class="icon"> <i class="fal fa-check"></i> </span> <span class="txt"> only one device </span> </li>
+                                    <li> <span class="icon"> <i class="fal fa-check"></i> </span> <span class="txt"> watch 5 videos by day </span> </li>
+                                    <li> <span class="icon"> <i class="fal fa-check"></i> </span> <span class="txt"> access to one course </span> </li>
+                                    <li> <span class="icon"> <i class="fal fa-check"></i> </span> <span class="txt"> only one device </span> </li>
+                                </ul>
+                                <a href="#" class="butn mt-2 w-100">
+                                    <span class="txt">Join now</span>
+                                    <span class="butn-icon">
+                                        <span class="butn-icon-inner"><i class="fal fa-arrow-right"></i></span>
+                                    </span>
+                                </a>
+                                <span class="recommended-txt sub-font"> best plan </span>
+                                <img src="../assets/moneymaker/osus/images/hero_shap1.svg" alt="" class="shap">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="item">
+                                <div class="price-wrapper">
+                                    <h3> 299.99 <small> SAR </small> </h3>
+                                    <h5> plan 3 </h5>
+                                </div>
+                                <div class="main-text sub-font"> We are trusted by 1,500 students and we have the best teachers in the Arab world  </div>
+                                <ul class="check-list">
+                                    <li> <span class="icon"> <i class="fal fa-check"></i> </span> <span class="txt"> access to one course </span> </li>
+                                    <li> <span class="icon"> <i class="fal fa-check"></i> </span> <span class="txt"> only one device </span> </li>
+                                    <li> <span class="icon"> <i class="fal fa-check"></i> </span> <span class="txt"> watch 5 videos by day </span> </li>
+                                    <li> <span class="icon"> <i class="fal fa-check"></i> </span> <span class="txt"> access to one course </span> </li>
+                                    <li> <span class="icon"> <i class="fal fa-check"></i> </span> <span class="txt"> only one device </span> </li>
+                                </ul>
+                                <a href="#" class="butn butn-light mt-2 w-100">
+                                    <span class="txt">Join now</span>
+                                    <span class="butn-icon">
+                                        <span class="butn-icon-inner"><i class="fal fa-arrow-right"></i></span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img src="../assets/moneymaker/osus/images/fav_line.png" alt="" class="shap">
+        </section> -->
+
+
+        <!-- ---------- sponsors ----------- -->
+        {% if content.show_sponsors > 0 %}
+        <section class="sponsors">
+            <div class="container">
+                <div class="row align-items-center gx-0">
+                    <div class="col-lg-5">
+                        <div class="info">
+                            <div class="section-title">
+                                <img src="{{content.small_background_image}}" alt="" class="icon view-element" data-element-field="small_background_image">
+                                <h2 class="view-element" data-element-field="sponsor_title">{{content.sponsor_title}}</h2>
+                            </div>
+                            <div class="text view-element" data-element-field="sponsor_text"> {{content.sponsor_text}} </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="sponsors-slider ms-lg-5 view-element" data-element-field="sponsors">
+                            <div class="swiper-wrapper">
+                                {% for item in content.sponsors %}
+                                {% if loop.index is odd %}
+                                <div class="swiper-slide">
+                                    <div class="logo-wrapper">
+                                        <a href="{{item.url}}" class="logo">
+                                            <img src="{{item.image}}" alt="">
+                                        </a>
+                                        {% if loop.last %}
+                                    </div>
+                                </div>
+                                        {% endif %}
+                                        {% else %}
+                                                <a href="{{item.url}}" class="logo">
+                                                    <img src="{{item.image}}" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                {% endfor %}
+                               
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+
+        <!-- ---------- customers ----------- -->
+        {% if content.show_customers > 0 %}
+        <section class="customers grad-color">
+            <div class="container">
+                <div class="section-title text-center">
+                    <img src="{{content.small_background_image}}" alt="" class="icon view-element" data-element-field="small_background_image">
+                    <h2> Our Customers </h2>
+                </div>
+                <div class="slider-content">
+                    <div class="customers-slider view-element" data-element-field="customers">
+                        <div class="swiper-wrapper">
+                            {% for item in content.customers %}
+                            <div class="swiper-slide">
+                                <div class="logo-wrapper">
+                                    <a href="{{item.url}}" class="logo">
+                                        <img src="{{item.image}}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        
+                        </div>
+                    </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+        
+
+        <!-- ---------- courses ----------- -->
+        {% if course|length > 0 %}
+        <section class="courses" id="courses">
+            <div class="container">
+                <div class="section-title text-center">
+                    <img src="{{content.small_background_image}}" alt="" class="icon view-element" data-element-field="small_background_image">
+                    <h2> our courses </h2>
+                </div>
+                <div class="tabs-content">
+                    <div class="courses-tabs-slider col-lg-10 mx-auto">
+                        <ul class="nav-pills swiper-wrapper" id="pills-tab" role="tablist">
+                            {% if selected_category != None and contains_category %}
+                            {% for item in category %}
+                            <li class="nav-item swiper-slide" role="presentation">
+                                <button class="nav-link {% if selected_category == item.category %}active{% endif %} btn-more-evt" id="{{item.category}}-tab" data-bs-toggle="pill" data-bs-target="#{{item.category}}">
+                                    <div class="cont"> 
+                                        <div class="icon">
+                                            <img src="{{item.image}}" alt="">
+                                        </div>
+                                        <h6> {{item.category}} </h6>
+                                    </div>
+                                </button>
+                            </li>
+                            {% endfor %}
+                            {% else %}
+                            {% for item in category %}
+                            <li class="nav-item swiper-slide" role="presentation">
+                                <button class="nav-link {% if loop.first %}active{% endif %} btn-more-evt" id="{{item.category}}-tab" data-bs-toggle="pill" data-bs-target="#{{item.category}}">
+                                    <div class="cont"> 
+                                        <div class="icon">
+                                            <img src="{{item.image}}" alt="">
+                                        </div>
+                                        <h6> {{item.category}} </h6>
+                                    </div>
+                                </button>
+                            </li>
+                            {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+                <div class="tab-content" id="pills-tabContent">
+
+                </div>
+                <div class="text-center mt-80">
+                    <a  id="btn_more" class="butn" data-category="{{category[0].category}}" style="cursor: pointer;">
+                        <span class="txt">more courses</span>
+                        <span class="butn-icon">
+                            <span class="butn-icon-inner"><i class="fal fa-arrow-right"></i></span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+        
+        
+        <!-- ---------- subscribe  ----------- -->
+         <section class="subscribe">
+            <div class="container">
+                <div class="subs-card col-lg-10 mx-auto grad-color">
+                    <div class="row justify-content-between align-items-end">
+                        <div class="col-lg-7">
+                            <form action="" class="form">
+                                <h2> Subscribe to our newsletter Get 20% Off Your Next Course. </h2>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Your Email Adress">
+                                    <button> <i class="fal fa-paper-plane me-2"></i> Subscribe </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="img">
+                                <img src="../assets/moneymaker/osus/images/subs.png" alt="" class="img-contain">
+                            </div>
+                        </div>
+                    </div>
+                    <img src="{{content.big_background_image}}" alt="" class="bg-shap view-element" data-element-field="big_background_image">
+                </div>
+            </div>
+            <img src="{{content.small_background_image}}" alt="" class="shap view-element" data-element-field="small_background_image">
+         </section>
+
+
+        <!-- <div class="img_pattern1">
+        </div> -->
+    </main>
+
+    <!-- ---------- footer  ----------- -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row justify-content-between gx-0">
+                <div class="col-lg-3">
+                    <div class="foot-info">
+                        <a href="#" class="logo">
+                            <img src="{{content.white_logo}}" alt="" class="view-element" data-element-field="white_logo">
+                        </a>
+                        <div class="text view-element" data-element-field="footer_text"> {{content.footer_text}} </div>
+                        <div class="social-links">
+                            <a href="{{content.facebook}}" class="view-element" data-element-field="facebook"> <i class="fab fa-facebook-f"></i> </a>
+                            <a href="{{content.instagram}}" class="view-element" data-element-field="instagram"> <i class="fab fa-instagram"></i> </a>
+                            <a href="{{content.twitter}}" class="view-element" data-element-field="twitter"> <i class="fab fa-x-twitter"></i> </a>
+                            <a href="{{content.youtube}}" class="view-element" data-element-field="youtube"> <i class="fab fa-youtube"></i> </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="links-group mt-5 mt-lg-0">
+                        <h6 class="sub-title"> Quick Links </h6>
+                        <ul class="links">
+                            <li> <a href="#"> about </a> </li>
+                            <li> <a href="#"> contact us </a> </li>
+                            <li> <a href="#"> courses </a> </li>
+                            <li> <a href="#"> faq </a> </li>
+                            <li> <a href="#"> privacy policy </a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="links-group mt-5 mt-lg-0">
+                        <h6 class="sub-title"> courses </h6>
+                        <ul class="links">
+                            <li> <a href="#"> business </a> </li>
+                            <li> <a href="#"> design </a> </li>
+                            <li> <a href="#"> photography & video </a> </li>
+                            <li> <a href="#"> development </a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="links-group mt-5 mt-lg-0">
+                        <h6 class="sub-title"> contact info </h6>
+                        <ul class="links">
+                            <li> <a href="#"> <span class="icon me-2"> <i class="fal fa-envelope"></i> </span> <span class="txt view-element" data-element-field="email"> {{content.email}} </span> </a> </li>
+                            <li> <a href="#"> <span class="icon me-2"> <i class="fal fa-phone-volume"></i> </span> <span class="txt view-element" data-element-field="phone"> {{content.phone}} </span> </a> </li>
+                            <li> <a href="#"> <span class="icon me-2"> <i class="fal fa-map-marker"></i> </span> <span class="txt view-element" data-element-field="address"> {{content.address}} </span> </a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="foot">
+            <div class="item"> All rights reserved © Osus - Designed and developed <a href="#"> <img src="../assets/moneymaker/osus/images/WOW-Logo.png" alt="" class="alyom-logo"> </a> </div>
+            <div class="vision-img">
+                <img src="../assets/moneymaker/osus/images/2030_1.png" alt="" class="img">
+            </div>
+            <div class="item"> powered by <a href="#"> <img src="../assets/moneymaker/osus/images/logo_wh.svg" alt="" class="alyom-logo"> </a> </div>
+        </div>
+    </footer>
+    
+    <!--End-Contents-->
+
+    <!-- ------------ modals ----------- -->
+
+    <!-- ====== start to top button ====== -->
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+                style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;">
+            </path>
+        </svg>
+    </div>
+    <!-- ====== end to top button ====== -->
+    <!-- -------------- request ----------------- -->
+    <script src="../assets/moneymaker/osus/js/lib/jquery-3.0.0.min.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/jquery-migrate-3.0.0.min.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/bootstrap.bundle.min.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/wow.min.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/jquery.fancybox.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/swiper.min.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/jquery.waypoints.min.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/jquery.counterup.js"></script>
+    <script src="../assets/moneymaker/osus/js/lib/back-to-top.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="../assets/frappe/dist/js/frappe-web.bundle.3PQWM4VP.js"></script>
+    
+    <script src="../assets/moneymaker/osus/js/main.js"></script>
+    <script src="../{{content.brand_name}}/courseList.js"></script>
+
+
+</body>
+
+</html>

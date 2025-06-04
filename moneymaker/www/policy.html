@@ -1,0 +1,74 @@
+{% set asset_path = "../assets/moneymaker/New/" %}
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> Osus | Policy  </title>
+    <!--Page Icon-->
+    {% include 'www/share/head.html' %}
+</head>
+<body>
+<div id="scrollsmoother-container">
+
+    {% include 'www/share/osus_nav.html' %}
+    <main>
+        <!-- Start section -->
+        <section class="content_pg about_sec section">
+            <div class="container">
+                <div class="col-lg-11 mx-auto">
+                    <div class="mb-5">
+                        <h4 class="subtitle color-primary mb-3">  سياسة الخصوصية     </h4>
+                        <h1 class="title fw-bold color-secondary mb-4"> أُسس بوابتك لعالم المنتجات الرقمية </h1>
+                    </div>
+                    <div class="txt_box ">
+                        {% for t in content.terms %}
+                        <div class="mb-4">
+                            <h5 class="fw-bold mb-3"> {{t.term.index}}. {{t.term.title}}</h5>
+                            <ul class="ul">
+                                {% for p in t.points%}
+                                    {% if p.is_point == 1 %}
+                                    <li> {{p.title}} </li>
+                                    {% else %}
+                                    <p style="font-size: 14px !important; color: #444 !important;"> {{p.title}} </p>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+            <img src="{{ asset_path }}images/pattern-1.svg" class="pattern" alt="">
+        </section>
+
+
+    </main>
+
+    <!-- Start footer -->
+    {% include 'www/share/osus_footer.html' %}
+</div>
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    <!-- loading -->
+    <!-- <div id="preloader">
+        <div id="loading-wrapper" class="show">
+            <div id="loading-text"> <img src="icon.png" alt=""> </div>
+            <div id="loading-content"></div>
+        </div>
+    </div> -->
+
+    <!--Js Files & Libraries-->
+    {% include 'www/share/js.html' %}
+</body>
+</html>

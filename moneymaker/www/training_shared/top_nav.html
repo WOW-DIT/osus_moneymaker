@@ -1,0 +1,41 @@
+{% set asset_path = '../assets/moneymaker/training_platform/' %}
+{% if url_prefix == None %}
+{% set url_prefix = '' %}
+{% endif %}
+<div class="top_nav">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="links">
+                    <a href="#">
+                        <img src="{{ asset_path }}images/icons/footer-1.svg" class="icon" alt="" /> <span class="dir_ltr">{{content.phone}}</span>
+                    </a>
+                    <a href="#">
+                        <img src="{{ asset_path }}images/icons/footer-2.svg" class="icon" alt="" /> <span class="dir_ltr"> {{content.email}} </span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="nav_end d-flex justify-content-end align-items-center">
+                    {% if logged_in == True %}
+                    <a href="{{url_prefix}}profile" class="nav_link">
+                        <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+                    </a>
+                    {% else %}
+                    <a href="{{url_prefix}}login" class="nav_link"> تسجيل الدخول </a>
+                    <a href="{{url_prefix}}register" class="nav_link"> تسجيل جديد </a>
+                    {% endif %}
+                    <div class="dropdown">
+                        <button class="lang_butn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{{ asset_path }}images/icons/flag_ar.svg" class="flag" alt="" /> العربية 
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#"> English </a></li>
+                            <li><a class="dropdown-item" href="#"> العربية </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

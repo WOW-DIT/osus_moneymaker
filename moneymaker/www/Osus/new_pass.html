@@ -1,0 +1,110 @@
+{% set asset_path = '../assets/moneymaker/training_platform/' %}
+{% set riyal_symbol = '/files/riyal_symbol.svg' %}
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> Reset Password </title>
+    <!--Page Icon-->
+    <link rel="shortcut icon" href="{{ content.icon_image }}" type="image/x-icon" title="Favicon" sizes="16x16" />
+
+    <!--Bootstrap with RTL-->
+    {% include 'www/training_shared/styles.html' %}
+
+</head>
+<body class="">
+
+    <!--Start navs-container -->
+    <div class="navs-container">
+        {% include 'www/training_shared/top_nav.html' %}
+
+        <!--Start main-nav-->
+        {% include 'www/training_shared/main_nav.html' %}
+
+    </div>
+
+    <main>
+
+        <!-- Start section -->
+        {% with title = 'تعيين كلمة المرور' %}
+        {% include 'www/training_shared/page_header.html' %}
+        {% endwith %}
+
+
+        <!-- Start section -->
+        <section class="register_pg section">
+            <div class="container">
+                <div class="col-lg-6 mx-auto">
+                    <form id="forget-form">
+                        <div class="form_box">
+                            <div class="head_box text-center ">
+                                <div class="logo_box text-center">
+                                    <img src="{{ asset_path }}images/logo.svg" class="logo dark_d_none " alt="" />
+                                    <img src="{{ asset_path }}images/logo_white.svg" class="logo dark_d_block d-none" alt="" />
+                                </div>
+                                <h6 class="subtitle mt-4 fs-5 color-primary">
+                                    <span class="line_w_circle me-3"></span>
+                                    <span class="">   كلمة مرور جديدة   </span>
+                                    <span class="line_w_circle ms-3"></span>
+                                </h6>
+                            </div>
+                            <div class="card_body">
+                                <div class="form-group  ">
+                                    <div class="form-floating show_hide_password">
+                                        <input type="password" class="form-control" placeholder="" name="pass" id="pass" autocomplete="new-password" required>
+                                        <label  class="floatingLabel">   كلمة المرور  </label>
+                                        <span class="icon">  <i class="fa-light fa-lock"></i> </span>
+                                        <i class="show_pass far fa-eye-slash"></i>
+                                    </div>
+                                </div>
+
+                                <div class="form-group  ">
+                                    <div class="form-floating show_hide_password">
+                                        <input type="password" class="form-control" placeholder="" name="cpass" id="cpass" autocomplete="new-password" required>
+                                        <label  class="floatingLabel">تأكيد   كلمة المرور  </label>
+                                        <span class="icon">  <i class="fa-light fa-lock"></i> </span>
+                                        <i class="show_pass far fa-eye-slash"></i>
+                                    </div>
+                                </div>
+                                <p id="pass-error" class="error hidden">كلمة المرور غير متطابقة</p>
+
+                                <div class="col-lg-6 mx-auto">
+                                    <button id="submit-btn" class="butn primary_butn butn_w_arrow mt-5 w-100" disabled>
+                                        <span> تأكيد </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- Start footer -->
+    {% include 'www/training_shared/footer.html' %}
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    <!-- loading -->
+    {% with logo = content.white_logo %}
+    {% include 'www/training_shared/loader.html' %}
+    {% endwith %}
+
+    <!--Js Files & Libraries-->
+    {% include 'www/training_shared/scripts.html' %}
+    <script src="../{{content.brand_name}}/new_pass.js"></script>
+</body>
+</html>

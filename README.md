@@ -1,0 +1,7 @@
+## moneymaker
+
+moneymaker
+
+#### License
+
+MIT

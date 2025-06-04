@@ -1,0 +1,244 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-05-29 12:29:57.582461",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "website_name",
+  "icon_image",
+  "logo_image",
+  "start_section",
+  "start_title",
+  "start_text",
+  "start_image_url",
+  "button1_show",
+  "button1_text",
+  "button1_url",
+  "advances",
+  "advances_items",
+  "introduction_section",
+  "about_title",
+  "about_text",
+  "about_image",
+  "banner_section",
+  "banner_title",
+  "banner_text",
+  "banner_image",
+  "add_services_section",
+  "services",
+  "footer_section",
+  "address",
+  "tel",
+  "email",
+  "twitter",
+  "facebook",
+  "youtube",
+  "instgram",
+  "linkedin",
+  "colors_section",
+  "primary_color",
+  "second_color"
+ ],
+ "fields": [
+  {
+   "fieldname": "website_name",
+   "fieldtype": "Data",
+   "label": "WebSite Name"
+  },
+  {
+   "fieldname": "icon_image",
+   "fieldtype": "Attach Image",
+   "label": "Icon Image"
+  },
+  {
+   "fieldname": "logo_image",
+   "fieldtype": "Attach Image",
+   "label": "Logo Image"
+  },
+  {
+   "fieldname": "start_section",
+   "fieldtype": "Section Break",
+   "label": "Start"
+  },
+  {
+   "fieldname": "start_title",
+   "fieldtype": "Data",
+   "label": "Start Title"
+  },
+  {
+   "fieldname": "start_text",
+   "fieldtype": "Text",
+   "label": "Start Text"
+  },
+  {
+   "fieldname": "start_image_url",
+   "fieldtype": "Attach Image",
+   "label": "Start Image Url"
+  },
+  {
+   "default": "0",
+   "fieldname": "button1_show",
+   "fieldtype": "Check",
+   "label": "Button1 Show"
+  },
+  {
+   "fieldname": "button1_text",
+   "fieldtype": "Data",
+   "label": "Button1 Text"
+  },
+  {
+   "fieldname": "button1_url",
+   "fieldtype": "Data",
+   "label": "Button1 Url"
+  },
+  {
+   "fieldname": "advances",
+   "fieldtype": "Section Break",
+   "label": "Advances"
+  },
+  {
+   "fieldname": "advances_items",
+   "fieldtype": "Table",
+   "label": "advances items",
+   "options": "Website Basic Template Table"
+  },
+  {
+   "fieldname": "introduction_section",
+   "fieldtype": "Section Break",
+   "label": "about"
+  },
+  {
+   "fieldname": "about_title",
+   "fieldtype": "Data",
+   "label": "about title"
+  },
+  {
+   "fieldname": "about_text",
+   "fieldtype": "Text",
+   "label": "about text"
+  },
+  {
+   "fieldname": "about_image",
+   "fieldtype": "Attach Image",
+   "label": "about Image"
+  },
+  {
+   "fieldname": "banner_section",
+   "fieldtype": "Section Break",
+   "label": "banner"
+  },
+  {
+   "fieldname": "banner_title",
+   "fieldtype": "Data",
+   "label": "Banner Title"
+  },
+  {
+   "fieldname": "banner_text",
+   "fieldtype": "Text",
+   "label": "Banner Text"
+  },
+  {
+   "fieldname": "banner_image",
+   "fieldtype": "Attach Image",
+   "label": "Banner Image"
+  },
+  {
+   "fieldname": "add_services_section",
+   "fieldtype": "Section Break",
+   "label": "ADD Services"
+  },
+  {
+   "fieldname": "services",
+   "fieldtype": "Table",
+   "label": "Services",
+   "options": "Website Basic Template Table"
+  },
+  {
+   "fieldname": "footer_section",
+   "fieldtype": "Section Break",
+   "label": "Footer"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Data",
+   "label": "Address"
+  },
+  {
+   "fieldname": "tel",
+   "fieldtype": "Data",
+   "label": "Tel"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "twitter",
+   "fieldtype": "Data",
+   "label": "Twitter"
+  },
+  {
+   "fieldname": "facebook",
+   "fieldtype": "Data",
+   "label": "Facebook"
+  },
+  {
+   "fieldname": "youtube",
+   "fieldtype": "Data",
+   "label": "Youtube"
+  },
+  {
+   "fieldname": "instgram",
+   "fieldtype": "Data",
+   "label": "Instgram"
+  },
+  {
+   "fieldname": "linkedin",
+   "fieldtype": "Data",
+   "label": "Linkedin"
+  },
+  {
+   "fieldname": "colors_section",
+   "fieldtype": "Section Break",
+   "label": "Colors"
+  },
+  {
+   "fieldname": "primary_color",
+   "fieldtype": "Color",
+   "label": "Primary Color"
+  },
+  {
+   "fieldname": "second_color",
+   "fieldtype": "Color",
+   "label": "Second Color"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-01-02 10:48:06.121553",
+ "modified_by": "Administrator",
+ "module": "moneymaker",
+ "name": "Website Basic Template",
+ "nsm_parent_field": "parent_website_basic_template",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,19 @@
+<svg width="120" height="118" viewBox="0 0 120 118" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="path-1-outside-1_1410_39" maskUnits="userSpaceOnUse" x="18" y="16" width="87" height="87" fill="black">
+<rect fill="white" x="18" y="16" width="87" height="87"/>
+<path d="M18 16H104V81.2C104 88.4807 104 92.121 102.583 94.9019C101.337 97.348 99.348 99.3367 96.9019 100.583C94.121 102 90.4807 102 83.2 102H18V16Z"/>
+</mask>
+<path d="M18 16H104H18ZM105 89C105 96.732 98.732 103 91 103H18V101H91C97.6274 101 103 95.6274 103 89H105ZM18 102V16V102ZM105 16V89C105 96.732 98.732 103 91 103V101C97.6274 101 103 95.6274 103 89V16H105Z" fill="black" mask="url(#path-1-outside-1_1410_39)"/>
+<path d="M18 16H104H18ZM105 89C105 96.732 98.732 103 91 103H18V101H91C97.6274 101 103 95.6274 103 89H105ZM18 102V16V102ZM105 16V89C105 96.732 98.732 103 91 103V101C97.6274 101 103 95.6274 103 89V16H105Z" fill="url(#paint0_linear_1410_39)" mask="url(#path-1-outside-1_1410_39)"/>
+<circle cx="16" cy="102" r="6" fill="#6E1946"/>
+<circle cx="16" cy="102" r="11" stroke="#6E1946" stroke-opacity="0.08" stroke-width="10"/>
+<circle cx="104" cy="16" r="6" fill="#6E1946"/>
+<circle cx="104" cy="16" r="11" stroke="#6E1946" stroke-opacity="0.08" stroke-width="10"/>
+<defs>
+<linearGradient id="paint0_linear_1410_39" x1="49.5187" y1="105.583" x2="114.978" y2="93.3167" gradientUnits="userSpaceOnUse">
+<stop stop-color="#657399"/>
+<stop offset="0.5" stop-color="#657399"/>
+<stop offset="1" stop-color="#6E1946"/>
+</linearGradient>
+</defs>
+</svg>

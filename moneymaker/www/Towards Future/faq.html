@@ -1,0 +1,149 @@
+{% set asset_path = '../assets/moneymaker/training_platform/' %}
+{% set riyal_symbol = '/files/riyal_symbol.svg' %}
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> FAQ </title>
+    <!--Page Icon-->
+    <!-- <link rel="shortcut icon" href="{{ asset_path }}images/icon.svg" type="image/x-icon" title="Favicon" sizes="16x16" /> -->
+
+    <!--Bootstrap with RTL-->
+    {% include 'www/training_shared/styles.html' %}
+
+</head>
+<body class="">
+
+    <!--Start navs-container -->
+    <div class="navs-container">
+        {% include 'www/training_shared/top_nav.html' %}
+
+        <!--Start main-nav-->
+        {% include 'www/training_shared/main_nav.html' %}
+    </div>
+
+    <main>
+        <!-- Start section -->
+        {% with title = 'الأسئلة الشائعة' %}
+        {% include 'www/training_shared/page_header.html' %}
+        {% endwith %}
+
+
+        <!-- Start section -->
+        <section class="faq_pg section">
+            <div class="container">
+                <div class="sec_head text-center mb-5">
+                    <h6 class="subtitle fs-5 color-primary">
+                        <span class="line_w_circle me-3"></span>
+                        <span class="readable"> الاسئلة الشائعة </span>
+                        <span class="line_w_circle ms-3"></span>
+
+                    </h6>
+                    <h1 class="mt-4 w-fit mx-auto readable"> 
+                        أهم أسالة العملاء والأجابات عنها  
+                    </h1>
+                </div>
+
+                <div class="accordion-side col-lg-10 mx-auto">
+                    <div class="accordion" id="accordionProcess">
+                        {% for f in faqs %}
+                        <div class="accordion-item">
+                            <div class="accordion-header" id="heading{{loop.index}}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{loop.index}}">
+                                    <span class="num"> {{f.order}} - </span> <h3 class="readable"> {{f.question}} </h3>
+                                </button>
+                            </div>
+                            <div id="collapse{{loop.index}}" class="accordion-collapse collapse" data-bs-parent="#accordionProcess">
+                                <div class="accordion-body">
+                                    <div class="text readable">
+                                        {{f.answer}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!-- <div class="accordion-item">
+                        <div class="accordion-header" id="headingTwo">
+                            <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                <span class="num"> 2 - </span> <h3 class="readable"> ماهى طرق الدفع المتاحة ؟ </h3>
+                            </button>
+                        </div>
+                        <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionProcess">
+                            <div class="accordion-body">
+                                <div class="text readable">
+                                    عند موافقه العميل المبدئيه على التصميم يتم ازالة هذا النص من التصميم ويتم وضع النصوص النهائية المطلوبة للتصميم ويقول البعض ان وضع النصوص التجريبية بالتصميم قد تشغل المشاهد عن وضع الكثير من الملاحظات او الانتقادات للتصميم الاساسي.
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="accordion-item">
+                        <div class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                <span class="num"> 3 - </span> <h3> هل يوجد لديكم فروع ؟  </h3>
+                            </button>
+                        </div>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionProcess">
+                            <div class="accordion-body">
+                                <div class="text">
+                                    متجر  متجر الكتروني سعودي مسجل بوزارة التجارة برقم 4030352790  
+
+                                    يوجد لدينا فرع في جدة شارع صاري الخالدية
+                                    
+                                    يمكنك الطلب من خلال الموقع( https://www. .sa/ar )
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                                <span class="num"> 4 - </span> <h3> ما اللذى يميز منصتكم عن المنصات الاخرى ؟ </h3>
+                            </button>
+                            </div>
+                            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionProcess">
+                            <div class="accordion-body">
+                                <div class="text">
+                                    عند موافقه العميل المبدئيه على التصميم يتم ازالة هذا النص من التصميم ويتم وضع النصوص النهائية المطلوبة للتصميم ويقول البعض ان وضع النصوص التجريبية بالتصميم قد تشغل المشاهد عن وضع الكثير من الملاحظات او الانتقادات للتصميم الاساسي.
+                                </div>
+                            </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- Start footer -->
+    {% include 'www/training_shared/footer.html' %}
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    {% include 'www/training_shared/reader.html' %}
+
+    <!-- loading -->
+    <!-- <div id="preloader">
+        <div id="loading-wrapper" class="show">
+            <div id="loading-text"> <img src="icon.png" alt=""> </div>
+            <div id="loading-content"></div>
+        </div>
+    </div> -->
+
+    <!--Js Files & Libraries-->
+    {% include 'www/training_shared/scripts.html' %}
+</body>
+</html>

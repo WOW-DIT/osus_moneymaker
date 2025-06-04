@@ -1,0 +1,312 @@
+{% set asset_path = '../assets/moneymaker/training_platform/' %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> {{ content.brand_name }} </title>
+    <!--Page Icon-->
+    <link rel="shortcut icon" href="{{ content.icon_image }}" type="image/x-icon" title="Favicon" sizes="16x16" />
+
+    {% include 'www/training_shared/styles.html' %}
+</head>
+<body class="" data-inst="{{content.institution}}" data-brand="{{content.brand_name}}">
+
+    <!--Start navs-container -->
+    <div class="navs-container">
+        <!--Start top-nav-->
+        {% with url_prefix=content.brand_name + '/' %}
+        {% include 'www/training_shared/top_nav.html' %}
+        {% endwith %}
+        <!--Start main-nav-->
+        {% with url_prefix=content.brand_name + '/' %}
+        {% include 'www/training_shared/main_nav.html' %}
+        {% endwith %}
+    </div>
+
+    <main>
+
+        <!-- Start Header -->
+        <header class="header section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <div class="txt_box mb-4">
+                            <h6 class="subtitle mb-4">
+                                <span class="line_w_circle me-3"></span>
+                                <div class="readable view-element" data-element-field="start_title_small">
+                                    {{ content.start_title_small }}
+                                </div>
+                            </h6>
+                            <h1 class="title my-4"> 
+                                <div class="readable view-element d-inline" data-element-field="start_title_big">
+                                    {{ content.start_title_big }}
+                                </div>
+                                <span class="view-element" data-element-field="with_logo">
+                                    <img src="{{ content.with_logo }}" class="logo " alt="" />
+                                </span>
+                            </h1>
+                            <div class="p col-lg-11 mt-4 readable view-element" data-element-field="start_text">
+                                {{ content.start_text }}
+                            </div>
+                            {% if content.start_button_show %}
+                            <a href="{{content.start_url_button}}" class="butn primary_butn butn_w_arrow mt-5">
+                                <span class="readable view-element" data-element-field="start_text_button"> {{ content.start_text_button }} </span>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                 
+                </div>
+            </div>
+
+            <img src="{{ content.big_background_image }}" class="bg" alt="" />
+
+            <img src="{{ asset_path }}images/pattern-1.svg" class="pattern" alt="">
+        </header>
+
+        <!-- Start section -->
+        {% if content.show_sponsors %}
+        <section class="sponsors_sec sponsors_sec2 section view-element" data-element-field="sponsors">
+            <div class="container">
+                <div class="swiper-container sponsors_swiper">
+                    <div class="swiper-wrapper">
+                        {% for sponsor in content.sponsors %}
+                        <div class="swiper-slide">
+                            <div class="logo_box">
+                                <img src="{{ sponsor.image }}" class="logo" alt="" />
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Start section -->
+        {% if course|length > 0 %}
+        <section id="courses_sec" class="courses_sec section">
+            <div class="container">
+                <div class="sec_head text-center mb-5">
+                    <h6 class="subtitle fs-5 color-primary">
+                        <span class="line_w_circle me-3"></span>
+                        <span class=" readable"> الدورات التدريبية </span>
+                        <span class="line_w_circle ms-3"></span>
+
+                    </h6>
+                    <h1 class="mt-4  w-fit mx-auto readable"> 
+                        ستجد ما يناسبك في دوراتنا
+                    </h1>
+                </div>
+              
+
+
+                <div class="tabs-content mb-5">
+                    <div class="courses-tabs-slider col-lg-10 mx-auto">
+                        <ul class="nav-pills swiper-wrapper" id="pills-tab" role="tablist">
+                            {% if selected_category != None and contains_category %}
+                            {% for item in category %}
+                            {% if loop.index0 == 0 %}
+                            <li class="nav-item swiper-slide swiper-slide-active" role="presentation" style="width: 198.667px; margin-left: 50px;">
+                                <button class="nav-link readable" id="pills-tab1-tab" data-bs-toggle="pill" data-bs-target="#pills-tab1">
+                                    <div class="icon_box"> <i class="fa-light fa-code"></i> </div>
+                                    {{ item.category_ar }}
+                                </button>
+                            </li>
+                            {% else %}
+                            <li class="nav-item swiper-slide" role="presentation" style="width: 198.667px; margin-left: 50px;">
+                                <button class="nav-link readable" id="{{item.category}}-tab" data-bs-toggle="pill" data-bs-target="#{{item.category}}">
+                                    <div class="icon_box"> <i class="fa-light fa-camera"></i> </div>
+                                    <p class="readable">
+                                        {{ item.category_ar }}
+                                    </p>
+                                </button>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                            {% else %}
+                            {% for item in category %}
+                            <li class="nav-item swiper-slide" role="presentation">
+                                <button class="nav-link {% if loop.first %}active{% endif %} btn-more-evt" id="{{item.category}}-tab" data-bs-toggle="pill" data-bs-target="#{{item.category}}">
+                                    <div class="icon_box">
+                                        <img style="width: 20px;" src="{{item.image}}" alt="">
+                                    </div>
+                                    <div class="readable">
+                                        {{ _(item.category) }}
+                                    </div>
+                                </button>
+                            </li>
+                            {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+                <div id="pills-tabContent">
+                <!-- <div class="row" id="pills-tabContent">
+                        <div class="col-lg-4">
+                            <a href="#">
+                                <div class="course_card">
+                                    <div class="img_box">
+                                        <img src="{{ asset_path }}images/courses-1.webp" class="secImg" alt="" />
+                                        <img src="{{ asset_path }}images/courses-1.webp" class="secImg" alt="" />
+                                        <div class="overlay"></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="categ readable">برمجة</p>
+                                        <h4 class="title readable"> اساسيات البرمجة للمبتدئين </h4>
+                                        <div class="p readable">
+                                            
+                                            دية تُعد من أفضل الشركات في مجال تقديم الخدمات التقنية  على جهوده الرائعة.
+                                                
+                                        </div>
+        
+                                        <div class="price_row">
+                                            <div class="price readable">
+                                                <span> 25.00 <small> ريال </small> </span>
+                                                <span class="old_prc"> 25.00 <small> ريال </small> </span>
+                                            </div>
+                                            <div class="stars">
+                                                <span class="star"> <i class="fas fa-star me-1"></i> </span>
+                                                <span> 5 </span>
+                                            </div>
+                                        </div>
+        
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-4">
+                            <a href="#">
+                                <div class="course_card">
+                                    <div class="img_box">
+                                        <img src="{{ asset_path }}images/courses-2.jpg" class="secImg" alt="" />
+                                        <img src="{{ asset_path }}images/courses-2.jpg" class="secImg" alt="" />
+                                        <div class="overlay"></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="categ readable">برمجة</p>
+                                        <h4 class="title readable"> اساسيات البرمجة للمبتدئين </h4>
+                                        <div class="p readable">
+                                            دية تُعد من أفضل الشركات في مجال تقديم الخدمات التقنية  على جهوده الرائعة.  
+                                        </div>
+        
+                                        <div class="price_row">
+                                            <div class="price readable">
+                                                <span> 25.00 <small> ريال </small> </span>
+                                                <span class="old_prc"> 25.00 <small> ريال </small> </span>
+                                            </div>
+                                            <div class="stars">
+                                                <span class="star"> <i class="fas fa-star me-1"></i> </span>
+                                                <span> 5 </span>
+                                            </div>
+                                        </div>
+        
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-4">
+                            <a href="#">
+                                <div class="course_card">
+                                    <div class="img_box">
+                                        <img src="{{ asset_path }}images/courses-3.webp" class="secImg" alt="" />
+                                        <img src="{{ asset_path }}images/courses-3.webp" class="secImg" alt="" />
+                                        <div class="overlay"></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="categ readable">برمجة</p>
+                                        <h4 class="title readable"> اساسيات البرمجة للمبتدئين </h4>
+                                        <div class="p readable">
+                                            
+                                            دية تُعد من أفضل الشركات في مجال تقديم الخدمات التقنية  على جهوده الرائعة.
+                                                
+                                        </div>
+        
+                                        <div class="price_row">
+                                            <div class="price readable">
+                                                <span> 25.00 <small> ريال </small> </span>
+                                                <span class="old_prc"> 25.00 <small> ريال </small> </span>
+                                            </div>
+                                            <div class="stars">
+                                                <span class="star"> <i class="fas fa-star me-1"></i> </span>
+                                                <span> 5 </span>
+                                            </div>
+                                        </div>
+        
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div> -->
+                </div>
+                
+                <a id="btn_more" class="butn primary_border_butn butn_w_arrow mx-auto mt-4"
+                {% if category %}data-category="{{ category[0].category }}"{% endif %}>
+                    <span>  شاهد المزيد  </span>
+                </a>
+
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Start section -->
+        {% if content.show_customers %}
+        <section class="partners_sec section view-element" data-element-field="customers">
+            <div class="container">
+                <h5 class="title_sec mb-5">
+                    <span class="border"></span>
+                    <span class="txt readable"> شركاء النجاح </span>
+                    <span class="border"></span>
+                </h5>
+                <div class="swiper-container sponsors_swiper pt-0 pb-5">
+                    <div class="swiper-wrapper">
+                        {% for customer in content.customers %}
+                        <div class="swiper-slide">
+                            <div class="logo_box">
+                                <img src="{{ customer.image }}" class="logo" alt="" />
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+    <!-- Start footer -->
+    {% with url_prefix=content.brand_name + '/' %}
+    {% include 'www/training_shared/footer.html' %}
+    {% endwith %}
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    <!-- audio_butns_box -->
+    {% include 'www/training_shared/reader.html' %}
+    
+    <!-- loading -->
+    <!-- <div id="preloader">
+        <div id="loading-wrapper" class="show">
+            <div id="loading-text"> <img src="icon.png" alt=""> </div>
+            <div id="loading-content"></div>
+        </div>
+    </div> -->
+
+    <!--Js Files & Libraries-->
+    {% include 'www/training_shared/scripts.html' %}
+    <script src="../{{content.brand_name}}/index.js"></script>
+    <!-- <script src="../share/lang.js"></script>
+    <script src="../share/reader.js"></script> -->
+</body>
+</html>

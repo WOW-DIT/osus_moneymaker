@@ -1,0 +1,173 @@
+{% set asset_path = '../assets/moneymaker/training_platform/' %}
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> Support </title>
+    <!--Page Icon-->
+    <link rel="shortcut icon" href="{{ asset_path }}images//icon.svg" type="image/x-icon" title="Favicon" sizes="16x16" />
+
+    <!--Bootstrap with RTL-->
+    {% include 'www/training_shared/styles.html' %}
+
+</head>
+<body class="">
+
+    <!--Start navs-container -->
+    <div class="navs-container">
+        {% include 'www/training_shared/top_nav.html' %}
+
+        <!--Start main-nav-->
+        {% include 'www/training_shared/main_nav.html' %}
+
+    </div>
+
+    <main>
+
+        <!-- Start section -->
+        {% with title = 'الدعم الفني' %}
+        {% include 'www/training_shared/page_header.html' %}
+        {% endwith %}
+
+
+        <!-- Start section -->
+        <section class="support_pg section">
+            <div class="container">
+                <div class="sec_head text-center0 mb-5">
+                    <h6 class="subtitle fs-5 color-primary">
+                        <span class="line_w_circle me-3"></span>
+                        <span class=""> الدعم الفني </span>
+                        <span class="line_w_circle ms-3"></span>
+
+                    </h6>
+                    <h1 class="mt-4 "> 
+                        تذاكر الدعم الفني    
+                    </h1>
+                </div>
+
+                <div class="d-flex justify-content-between mb-5">
+                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button id="open-btn" class="nav-link {% if support_details.status != 'Closed' and support_details.status != 'Resolved' %}active{% endif %} readable" id="pills-tab1-tab" data-bs-toggle="pill" data-bs-target="#pills-tab1" type="button" role="tab" aria-controls="pills-tab1" aria-selected="true">المفتوحة</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button id="closed-btn" class="nav-link {% if support_details.status == 'Closed' or support_details.status == 'Resolved' %}active{% endif %} readable" id="pills-tab2-tab" data-bs-toggle="pill" data-bs-target="#pills-tab2" type="button" role="tab" aria-controls="pills-tab2" aria-selected="false">المغلقة</button>
+                        </li>
+                    </ul>
+                    <a href="new_ticket" class="butn primary_butn ticket_butn ">
+                        <i class="fa-regular fa-plus"></i>
+                        <div class="readable">إنشاء تذكرة جديدة</div>
+                    </a>
+                </div>
+                
+                {% set months = [
+                    '', 'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+                    'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
+                ] %}
+                <div class="box ">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th> رقم التذكرة   </th>
+                                    <th> الموضوع </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in support_details.issues %}
+                                {% set day = i.modified.strftime('%d') %}
+                                {% set month = months[i.modified.month] %}
+                                {% set year = i.modified.strftime('%Y') %}
+                                {% set time = i.modified.strftime('%I:%M %p') %}
+                                <tr>
+                                    <td> 
+                                        <div >{{i.name}}</div>
+                                        <div style="color: grey; font-size: 9pt;">{{ day }} {{ month }} {{ year }} - {{ time }}</div>
+                                    </td>
+
+                                    <td class="readable"> {{i.subject}} </td>
+                                    <td>
+                                        <a href="support_det?id={{i.name}}" class="butn sm_butn primary_border_butn mx-auto more_butn">
+                                            <span> <i class="fa-light fa-arrow-left-long mx-0"></i> </span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="pagination-wrapper mt-5">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">«</span>
+                            </a>
+                            </li>
+                            {% set number_of_pages = support_details.number_of_pages %}
+                            {% set page_number = support_details.page_number %}
+                            {% set status = support_details.status %}
+
+                            {% for page in range(1, number_of_pages+1) %}
+                            {% if page|int == page_number|int %}
+                            <li class="page-item">
+                                <div class="page-link active">
+                                    {{page}}
+                                </div>
+                            </li>
+                            {% else %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                href="support?status={{status}}&page={{page}}">
+                                    {{page}}
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                            <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">»</span>
+                            </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- Start footer -->
+    {% include 'www/training_shared/footer.html' %}
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    {% include 'www/training_shared/reader.html' %}
+
+    <!-- loading -->
+    <!-- <div id="preloader">
+        <div id="loading-wrapper" class="show">
+            <div id="loading-text"> <img src="icon.png" alt=""> </div>
+            <div id="loading-content"></div>
+        </div>
+    </div> -->
+
+    <!--Js Files & Libraries-->
+    {% include 'www/training_shared/scripts.html' %}
+    <script src="../{{content.brand_name}}/support.js"></script>
+</body>
+</html>

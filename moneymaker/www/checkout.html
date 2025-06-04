@@ -1,0 +1,118 @@
+{% set asset_path = "../assets/moneymaker/New/" %}
+{% set riyal_path = "../assets/moneymaker/New/images/riyal_symbol.svg" %}
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> Checkout  </title>
+    <!--Page Icon-->
+    {% include 'www/share/head.html' %}
+</head>
+<body>
+<div id="scrollsmoother-container">
+
+    <!--Start navs-container -->
+    {% include 'www/share/osus_nav.html' %}
+
+    <main>
+
+        <!-- Start section -->
+        <section class="checkout_pg  section">
+            <div class="container">
+                <div class="sec_head text-center pb-2 mb-5">
+                    <img src="{{ asset_path }}images/icon-2.svg" class="icon mb-3" alt="" />
+                    <h4 class="subtitle color-primary mb-3"> إتمام الطلب </h4>
+                    <!-- <h1 class="title fw-bold color-secondary mb-3"> إتمام طلب باقات متجر المنتجات الرقمية     </h1> -->
+                </div>
+                <div class="inner">
+                    <div class="pkg_det_box col-lg-6 mx-auto">
+                        <h2 class="fw-bold color-primary" id="package-name"></h2>
+                        <div class="p my-2"id="package-desc"></div>
+                        <h3 class="price hidden" id="discount-block">
+                            <span class="dir_ltr"><b id="discount-display"></b> </span>
+                            <small class="fs-5"> 
+                                <img src="{{ riyal_path }}" style="height: 25px;"/>
+                            </small>
+                        </h3>
+                        <h3 class="price" style="display: flex; justify-content: center; align-items: center; gap: 5px;">
+                            <div id="old-price-display" class="hidden"><span class="dir_ltr text-decoration-line-through" style="color: grey; font-size: 14pt !important;"><b id="old-price-display-left">0</b>.<sup class="fs-6" id="old-price-display-right">00</sup></span> / </div>
+                            <span class="dir_ltr"><b id="price-display-left">0</b>.<sup class="fs-6" id="price-display-right">00</sup> </span>
+                            <small class="fs-5"> 
+                                <img src="{{ riyal_path }}" style="height: 25px;"/>
+                            </small>
+                        </h3>
+                    </div>
+
+                    <form>
+                        <div class="payment">
+                            <h5 class="title fw-bold mb-4"> اختر طريقة الدفع </h5>
+                            <div class="row">
+                                {% for m in payment_methods %}
+                                {% set index = loop.index0 %}
+                                <div class="col-lg-4">
+                                    <button type="button" class="pay_card" style="width: 100%; height: 100%;" data-method="{{ m.method }}">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="payRadio" id="{{ m.method }}-pay"
+                                            {% if index == 0 %} checked {% endif %}>
+                                            <label class="form-check-label" for="payRadio1">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span> {{ m.method_ar }} </span>
+                                                    <img src="{{ m.image }}" class="payLogo" alt=""/>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </button>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-lg-6 my-5">
+                            <h5 class="title fw-bold mb-4"> كوبون الخصم  </h5>
+                            <div class="couboun_box mb-4">
+                                <div class="form-group position-relative">
+                                    <input type="text" class="form-control" id="coupon-input" placeholder="ادخل الكود">
+                                    <button type="button" class="apply_butn" id="coupon-btn">تطبيق</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 mx-auto mt-4">
+                            <button type="button" id="pay-btn" class="butn primary_butn fs-5 w-100">
+                                <span> ادفع الآن </span>
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+          
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Start footer -->
+    {% include 'www/share/osus_footer.html' %}
+
+</div>
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    <!-- loading -->
+    {% include 'www/share/loading.html' %}
+
+    <!--Js Files & Libraries-->
+    {% include 'www/share/js.html' %}
+    <script src="checkout.js"></script>
+</body>
+</html>

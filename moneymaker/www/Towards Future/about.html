@@ -1,0 +1,86 @@
+{% set asset_path = '../assets/moneymaker/training_platform/' %}
+{% set riyal_symbol = '/files/riyal_symbol.svg' %}
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="author" content="Wafaa Hegazy">
+    <!--Page Name-->
+    <title> About </title>
+    <!--Page Icon-->
+    <link rel="shortcut icon" href="{{ content.icon_image }}" type="image/x-icon" title="Favicon" sizes="16x16" />
+
+    {% include 'www/training_shared/styles.html' %}
+</head>
+<body class="">
+
+    <!--Start navs-container -->
+    <div class="navs-container">
+        {% include 'www/training_shared/top_nav.html' %}
+        <!--Start main-nav-->
+        {% include 'www/training_shared/main_nav.html' %}
+    </div>
+
+    <main>
+
+        <!-- Start section -->
+        {% with title = 'نبذة عنا' %}
+        {% include 'www/training_shared/page_header.html' %}
+        {% endwith %}
+
+
+        <!-- Start section -->
+        <section class="about_pg section">
+            {% for about in content.about_data %}
+            <div class="item {%if loop.index0 % 2 != 0 %}item_inverse{% endif %}">
+                <div class="container">
+                    <div class="row ">
+                        <div class="col-lg-7">
+                            <div class="txt_box ">
+                                <h6 class="subtitle color-primary mb-3">
+                                    <span class="line_w_circle me-3"></span>
+                                    من نحن
+                                </h6>
+                                <h1 class="title mb-4"> {{ about.title }} </h1>
+                                <div class="p">
+                                    {{ about.text }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="img_box">
+                                <img src="{{ about.image }}" class="secImg" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}           
+        </section>
+    </main>
+
+    <!-- Start footer -->
+    {% include 'www/training_shared/footer.html' %}
+
+    <!--Scroll to top button-->
+    <div class="progress-wrap ">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102"><path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 220.587;"></path></svg>
+    </div>
+
+    <!-- loading -->
+    <!-- <div id="preloader">
+        <div id="loading-wrapper" class="show">
+            <div id="loading-text"> <img src="icon.png" alt=""> </div>
+            <div id="loading-content"></div>
+        </div>
+    </div> -->
+
+    <!--Js Files & Libraries-->
+    {% include 'www/training_shared/scripts.html' %}
+</body>
+</html>

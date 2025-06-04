@@ -1,0 +1,23 @@
+{% set asset_path = '../assets/moneymaker/training_platform/' %}
+
+<!--Bootstrap with RTL-->
+<link rel="stylesheet" href="{{ asset_path }}css/lib/bootstrap.rtl.css">
+<!--Bootstrap with LTR-->
+<!-- <link rel="stylesheet" href="{{ asset_path }}css/lib/bootstrap.min.css"> -->
+
+<!-- Fontawosome 6 pro icons  -->
+<link rel="stylesheet" href="{{ asset_path }}css/lib/all.min.css">
+<!-- Libraries  -->
+<link rel="stylesheet" href="{{ asset_path }}css/lib/animate.css">
+<link rel="stylesheet" href="{{ asset_path }}css/lib/jquery.fancybox.css">
+<link rel="stylesheet" href="{{ asset_path }}css/lib/swiper.min.css">
+<link rel="stylesheet" href="{{ asset_path }}css/lib/jquery.uploader.css">
+<link rel="stylesheet" href="{{ asset_path }}css/style.css">
+<style>
+    :root{
+        --primary:{{ content.main_color }};
+        --secondary:{{ content.second_color }};
+      /* --text-prim:{{content.primary_text_color}}; */
+      /* --text-sec:{{content.secondary_text_color}}; */
+    }
+</style>
