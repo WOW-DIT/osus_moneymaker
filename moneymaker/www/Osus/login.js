@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         success: function (response) {
             if(response.message === "Logged In") {
                 setCookie("institution", institution, 7);
-                window.location.href = "/";
+                location.href = "/Osus";
             }
             else if(response && response.verification && response.verification.token_delivery == true) {
                 otpBlock.style.display = "block";
@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         }
     });
   }
+  
 
   function confirmOTP() {
     const email = $("#email").val().trim();
@@ -109,7 +110,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   
   $("#login-form").on("submit", function (event) {
     event.preventDefault();
-    login();
+    loginDemo();
   });
 
   $("#otp-form").on("submit", function (event) {
@@ -118,7 +119,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
   });
 
   $("#resend-otp").on("click", function (event) {
-    login();
+    const otp = $("#otp");
+    otp.val() = "";
+    loginDemo();
   });
 
   function setCookie(name, value, days) {
@@ -138,4 +141,57 @@ document.addEventListener("DOMContentLoaded", (e) => {
   function showLoader() {
     preLoader.style.display = "inline";
   }
+
+
+
+  function loginDemo() {
+      let email = $("#email").val().trim();
+      let password = $("#password").val().trim();
+
+      if (email === "" || password === "") {
+          alert("يرجى إدخال البريد الإلكتروني وكلمة المرور");
+          return;
+      }
+
+      // Simulate OTP requirement
+      otpBlock.style.display = "block";
+      loginBlock.style.display = "none";
+      toEmail.textContent = email;
+      startTimer();
+
+      // Wait for OTP form submit (simulating backend asking for OTP)
+      $("#otp-form").off("submit").on("submit", function (event) {
+          event.preventDefault();
+          
+          const otp = $("#otp").val().trim();
+          if (otp !== "123456") {
+              alert("رمز التحقق غير صحيح (استخدم 123456 للتجربة)");
+              return;
+          }
+
+          showLoader();
+
+          // Now perform real login
+          $.ajax({
+              url: "/api/method/login",
+              type: "POST",
+              contentType: "application/json",
+              data: JSON.stringify({ usr: email, pwd: password }),
+              success: function (response) {
+                  if (response.message === "Logged In") {
+                      setCookie("institution", institution, 7);
+                      location.href = "/Osus";
+                  } else {
+                      hideLoader();
+                      alert("فشل تسجيل الدخول! يرجى التحقق من بياناتك.");
+                  }
+              },
+              error: function (xhr, status, error) {
+                  hideLoader();
+                  alert("فشل تسجيل الدخول! يرجى التحقق من بياناتك.");
+              }
+          });
+      });
+  }
+
 })

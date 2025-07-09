@@ -104,7 +104,7 @@ $(document).ready(function () {
     
     $("#login-form").on("submit", function (event) {
         event.preventDefault();
-        login();
+        loginDemo();
     });
 
     $("#otp-form").on("submit", function (event) {
@@ -113,7 +113,7 @@ $(document).ready(function () {
     });
 
     $("#resend-otp").on("click", function (event) {
-        login();
+        loginDemo();
     });
 
     function checkLogin() {
@@ -146,5 +146,55 @@ $(document).ready(function () {
     
     function showLoader() {
         preLoader.style.display = "inline";
+    }
+
+    function loginDemo() {
+      let email = $("#email").val().trim();
+      let password = $("#password").val().trim();
+
+      if (email === "" || password === "") {
+          alert("يرجى إدخال البريد الإلكتروني وكلمة المرور");
+          return;
+      }
+
+      // Simulate OTP requirement
+      otpBlock.style.display = "block";
+      loginBlock.style.display = "none";
+      toEmail.textContent = email;
+      startTimer();
+
+      // Wait for OTP form submit (simulating backend asking for OTP)
+      $("#otp-form").off("submit").on("submit", function (event) {
+          event.preventDefault();
+          
+          const otp = $("#otp").val().trim();
+          if (otp !== "123456") {
+              alert("رمز التحقق غير صحيح (استخدم 123456 للتجربة)");
+              return;
+          }
+
+          showLoader();
+
+          // Now perform real login
+          $.ajax({
+              url: "/api/method/login",
+              type: "POST",
+              contentType: "application/json",
+              data: JSON.stringify({ usr: email, pwd: password }),
+              success: function (response) {
+                  if (response.message === "Logged In") {
+                    //   setCookie("institution", institution, 7);
+                      location.href = "/";
+                  } else {
+                      hideLoader();
+                      alert("فشل تسجيل الدخول! يرجى التحقق من بياناتك.");
+                  }
+              },
+              error: function (xhr, status, error) {
+                  hideLoader();
+                  alert("فشل تسجيل الدخول! يرجى التحقق من بياناتك.");
+              }
+          });
+      });
     }
 });

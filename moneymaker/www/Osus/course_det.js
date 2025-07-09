@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", function(e){
-    const purchaseBtn = document.getElementById("purchase-btn")
+    const purchaseBtn = document.getElementById("purchase-btn");
+    console.log(purchaseBtn)
     if(purchaseBtn) {
         purchaseBtn.onclick = intent
     }
 })
 
 function intent() {
+    debugger
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const course_id = urlParams.get("id")
