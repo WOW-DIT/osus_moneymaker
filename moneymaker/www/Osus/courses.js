@@ -114,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (r.message) {
               const courses = r.message.courses;
+              console.log(courses)
               const numberOfPages = r.message.number_of_pages;
               const coursesLength = r.message.number_of_courses;
 
@@ -125,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
               row.innerHTML = courses.map(item => `
                 <div class="col-lg-4">
-                    <a href="course_detail?id=${item.course_name}">
+                    <a href="course_detail?id=${item.course_name_ar}">
                         <div class="course_card">
                             <div class="img_box">
                                 <img src="${item.hero_image}" class="secImg" alt="" />
@@ -133,10 +134,10 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <div class="overlay"></div>
                             </div>
                             <div class="card-body">
-                                <p class="categ">${item.category}</p>
-                                <h4 class="title"> ${item.course_name} </h4>
+                                <p class="categ">${item.category_ar}</p>
+                                <h4 class="title"> ${item.course_name_ar} </h4>
                                 <div class="p">
-                                  ${item.description}
+                                  ${item.description_ar}
                                 </div>
 
                                 <div class="price_row">

@@ -68,8 +68,8 @@ def getCourses():
         where_clause = " AND ".join(conditions)
 
         query = f""" 
-            SELECT c.name, c.course_name, c.hero_image, c.description, c.created_by, 
-                   c.price AS priceold, c.category,
+            SELECT c.name, c.course_name, c.course_name_ar, c.hero_image, c.description, c.description_ar, c.created_by, 
+                   c.price AS priceold, cat.category, cat.category_ar,
                    COALESCE(AVG(r.rating), 0) AS average_rating, COUNT(r.rating) AS rate_count,
                    COALESCE(FLOOR(AVG(r.rating)), 0) AS full_stars, 
                    ROUND(c.price * (1 - c.discount / 100), 2) AS price,
@@ -77,6 +77,7 @@ def getCourses():
                    5 AS total_stars,
                    COUNT(DISTINCT cp.user) AS purchase_count
             FROM `tabCourse` AS c
+            LEFT JOIN `tabCourse Category` AS cat ON cat.name = c.category
             LEFT JOIN `tabCourse Ratings` AS r ON c.name = r.course
             LEFT JOIN `tabCourse Purchase` AS cp ON cp.course = c.name AND cp.is_refunded = 0
             WHERE {where_clause}

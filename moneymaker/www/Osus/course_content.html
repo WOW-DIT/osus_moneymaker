@@ -124,17 +124,17 @@
                                                     <div class="d-flex flex-column justify-content-center align-items-start gap-3" style="width: 50%">
                                                         {% for mo in qu.matching_questions %}
                                                         <div class="d-flex justify-content-start gap-2">
-                                                            <div>{{mo.matching_number}}-</div>
-                                                            <div>{{mo.option}}</div>
+                                                            <div class="form-check-label">{{mo.matching_number}}-</div>
+                                                            <div class="form-check-label">{{mo.option}}</div>
                                                         </div>
                                                         {% endfor %}
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center align-items-center gap-3" style="width: 50%">
                                                         {% for mo in qu.matching_answers %}
                                                         <div class="d-flex justify-content-center gap-2">
-                                                            <input class="matching-input text-center w-25" name="{{qu.question}}" type="number"
+                                                            <input class="matching-input form-check-label text-center w-25" name="{{qu.question}}" type="number"
                                                             {% if active_item.item.state == "Finished" %}value="{{qu.matching_values[loop.index0]}}" disabled{% endif %}>
-                                                            <div>{{mo.option}}</div>
+                                                            <div class="form-check-label">{{mo.option}}</div>
                                                         </div>
                                                         {% endfor %}
                                                     </div>

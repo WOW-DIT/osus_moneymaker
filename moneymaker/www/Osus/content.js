@@ -483,8 +483,8 @@ async function setMainContent(course_item, subtitles) {
         q.matching_questions.forEach(mo => {
           quiz_html += `
               <div class="d-flex justify-content-start gap-2">
-                  <div>${mo.matching_number}-</div>
-                  <div>${mo.option}</div>
+                  <div class="form-check-label">${mo.matching_number}-</div>
+                  <div class="form-check-label">${mo.option}</div>
               </div>
           `;
         });
@@ -499,14 +499,14 @@ async function setMainContent(course_item, subtitles) {
           quiz_html += `
               <div class="d-flex justify-content-center gap-2" ${course_item.state == "Finished"? q.answers[answer_index] == "1"? backgroundStyle : "" : ""}>
                   <input
-                    class="matching-input text-center w-25"
+                    class="matching-input form-check-label text-center w-25"
                     name="${q.question}"
                     data-index="${answer_index}"
                     type="number"
                     value="${course_item.state == "Finished"? q.matching_values[answer_index] : ""}"
                     ${course_item.state == "Finished"? "disabled" : ""}
                   >
-                  <div>${mo.option}</div>
+                  <div class="form-check-label">${mo.option}</div>
               </div>
           `;
           answer_index++;
@@ -514,7 +514,7 @@ async function setMainContent(course_item, subtitles) {
         quiz_html += `
             </div>
           </div>
-          ${answerState == "partially_correct"? "<div>The answer is partially correct.</div>" : ""}
+          ${answerState == "partially_correct"? '<div class="form-check-label mt-5">الإجابة صحيحة جزئيا.</div>' : ""}
         `;
       }
 
